@@ -1,13 +1,13 @@
-# Rails WP CMS (API + Server-rendered UI)
+# Rails WP Monorepo (API-Only + CMU-UI)
 
-A production-ready CMS built with Ruby on Rails 8, strictly adhering to the WordPress database schema. It provides REST + GraphQL APIs, JWT authentication, and an optional server-rendered UI while maintaining compatibility with legacy WordPress data.
+A production-ready Rails codebase built around a WordPress-compatible schema, reorganized into a backend `API-Only` workspace and a frontend `CMU-UI` workspace for clearer ownership and maintainability.
 
 ## Features
 
 - **Legacy Compatibility**: Full ORM mapping of WordPress tables (`wp_posts`, `wp_users`, etc.).
 - **REST API v2**: Standardized JSON:API endpoints for Posts, Users, Taxonomies, and Media.
 - **GraphQL API**: Flexible query interface using `graphql-ruby`.
-- **Server-rendered UI**: Simple HTML pages for browsing posts (CMS-capable mode).
+- **Separated Frontend Workspace**: `CMU-UI` stores frontend pages/components/assets.
 - **Authentication**: Secure JWT-based authentication with `devise-jwt`.
 - **RBAC**: Role-Based Access Control mirroring WordPress capabilities.
 - **Caching**: Redis-based fragment and low-level caching.
@@ -39,7 +39,7 @@ A production-ready CMS built with Ruby on Rails 8, strictly adhering to the Word
     ```
 
 4.  **Access the application**:
-    - **Frontend**: `http://localhost:3000/` (posts) and `http://localhost:3000/posts/:id`
+    - **CMU-UI**: `http://localhost:3001/`
     - **API**: `http://localhost:3000/api/v2`
     - **GraphQL**: `http://localhost:3000/graphql` (POST)
     - **Swagger Docs**: `http://localhost:3000/api-docs`
@@ -65,78 +65,18 @@ query {
 }
 ```
 
-## From API-only to CMS-capable (Server-rendered UI)
+## Repository Architecture
 
-This repo started as an API-only Rails app (`config.api_only = true`) providing REST + GraphQL over a WordPress-compatible MySQL schema. It can be upgraded into a CMS-capable Rails app that serves HTML pages (server-rendered UI) while keeping the API endpoints.
+- Backend workspace: [API-Only/README.md](file:///Users/shang/Prj2026/rails-wp/API-Only/README.md)
+- Frontend workspace: [CMU-UI/README.md](file:///Users/shang/Prj2026/rails-wp/CMU-UI/README.md)
+- Backend runtime config: [application.rb](file:///Users/shang/Prj2026/rails-wp/API-Only/config/application.rb)
+- Backend routes: [routes.rb](file:///Users/shang/Prj2026/rails-wp/API-Only/config/routes.rb)
 
-### What changed
+### Separation Rules
 
-#### 1) Enable Rails view stack
-
-- Switched from API-only to full Rails middleware so controllers can render templates, use sessions/cookies, and serve assets:
-  - Set `config.api_only = false` in [application.rb](file:///Users/shang/Prj2026/rails-wp/config/application.rb)
-
-#### 2) Add a minimal “standard Rails” frontend stack
-
-- Added gems for a lightweight Rails UI:
-  - `propshaft` (asset pipeline)
-  - `importmap-rails` (JS without Node bundling)
-  - `turbo-rails` (Hotwire navigation)
-  - `stimulus-rails` (optional controllers)
-  - See [Gemfile](file:///Users/shang/Prj2026/rails-wp/Gemfile)
-- Added importmap + JS entrypoint:
-  - [importmap.rb](file:///Users/shang/Prj2026/rails-wp/config/importmap.rb)
-  - [application.js](file:///Users/shang/Prj2026/rails-wp/app/javascript/application.js)
-- Added a minimal stylesheet:
-  - [application.css](file:///Users/shang/Prj2026/rails-wp/app/assets/stylesheets/application.css)
-
-#### 3) Add frontend routes and controllers
-
-- Added HTML routes:
-  - `root "posts#index"`
-  - `resources :posts, only: [:index, :show]`
-  - See [routes.rb](file:///Users/shang/Prj2026/rails-wp/config/routes.rb)
-- Added a web base controller that uses `ActionController::Base` (important for HTML rendering):
-  - [web_controller.rb](file:///Users/shang/Prj2026/rails-wp/app/controllers/web_controller.rb)
-- Added a basic Posts controller (frontend):
-  - [posts_controller.rb](file:///Users/shang/Prj2026/rails-wp/app/controllers/posts_controller.rb)
-
-#### 4) Add views (layout + posts)
-
-- Added the main HTML layout:
-  - [application.html.erb](file:///Users/shang/Prj2026/rails-wp/app/views/layouts/application.html.erb)
-- Added pages:
-  - [index.html.erb](file:///Users/shang/Prj2026/rails-wp/app/views/posts/index.html.erb) (list recent posts)
-  - [show.html.erb](file:///Users/shang/Prj2026/rails-wp/app/views/posts/show.html.erb) (render a single post)
-
-### How it works
-
-- Frontend pages read from the same WordPress-mapped models you already have (e.g. `WpPost`).
-- The existing API namespace remains available:
-  - `/api/v2/...` continues to serve JSON.
-  - `/graphql` continues to serve GraphQL.
-- The post show page uses `sanitize(@post.post_content)` to reduce XSS risk when rendering stored HTML.
-
-### Running locally (Docker)
-
-```bash
-docker compose build web
-docker compose up -d
-```
-
-- Frontend:
-  - `http://localhost:3000/`
-  - `http://localhost:3000/posts/:id`
-- API:
-  - `http://localhost:3000/api/v2/posts`
-  - `http://localhost:3000/graphql` (POST)
-  - `http://localhost:3000/api-docs`
-
-### Next steps to make it a “real CMS”
-
-- Add an admin UI (create/edit/publish posts) using server-rendered forms + Turbo.
-- Add authorization rules for admin screens (reuse `devise` + existing roles/capabilities).
-- Add media upload UI using Active Storage + your existing API patterns.
+- `API-Only` owns REST/GraphQL endpoints, models, services, middleware, and utilities.
+- `CMU-UI` owns pages, components, assets, hooks, and state exports.
+- Cross-folder coupling is minimized through HTTP boundaries (`/api/v2`, `/graphql`).
 
 ## Management Tasks
 

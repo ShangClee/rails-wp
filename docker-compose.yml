@@ -19,22 +19,30 @@ services:
       - redis_data:/data
 
   web:
-    build: .
+    build: ./API-Only
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     volumes:
-      - .:/rails
+      - ./API-Only:/rails
     ports:
       - "3000:3000"
     environment:
       DATABASE_URL: mysql2://root:password@db/hanmitravel
       REDIS_URL: redis://redis:6379/1
       RAILS_ENV: development
-      DEVISE_JWT_SECRET_KEY: 3b7e6f9d2a1c8b4e5f0g6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m8n9o0p1q2r3s4t5u6v7w8x9y0z
-      SECRET_KEY_BASE: development_secret
+      DEVISE_JWT_SECRET_KEY: ${DEVISE_JWT_SECRET_KEY:-development_jwt_secret}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:-development_secret}
+      CMU_UI_ORIGIN: http://localhost:3001
       RAILS_LOG_TO_STDOUT: true
     depends_on:
       - db
       - redis
+
+  cmu_ui:
+    image: nginx:alpine
+    ports:
+      - "3001:80"
+    volumes:
+      - ./CMU-UI:/usr/share/nginx/html:ro
 
 volumes:
   db_data:
