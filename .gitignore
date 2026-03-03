@@ -1,0 +1,16 @@
+.bundle
+.byebug_history
+.env
+.env.local
+.log
+tmp
+storage
+vendor/bundle
+node_modules
+public/packs
+public/assets
+config/master.key
+config/credentials.yml.enc
+*.swp
+*.swo
+.DS_Store
