@@ -931,3 +931,192 @@ Completed 204 No Content in 28ms (ActiveRecord: 13.5ms (6 queries, 0 cached) | G
   [1m[36mWpPost Load (0.2ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 4 LIMIT 1 /*application='App'*/[0m
   [1m[36mWpTermRelationship Create (2.9ms)[0m  [1m[32mINSERT INTO `wp_term_relationships` (`object_id`, `term_order`, `term_taxonomy_id`) VALUES (4, 0, 2) /*application='App'*/[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+Started GET "/" for 192.168.107.1 at 2026-03-03 20:41:02 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (3.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+Processing by PostsController#index as */*
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mWpPost Load (1.1ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' ORDER BY `wp_posts`.`post_date` DESC LIMIT 10 /*action='index',application='App',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:4
+  Rendered posts/index.html.erb within layouts/application (Duration: 45.5ms | GC: 18.9ms)
+  Rendered layout layouts/application.html.erb (Duration: 61.1ms | GC: 19.9ms)
+Completed 200 OK in 168ms (Views: 74.8ms | ActiveRecord: 18.8ms (1 query, 0 cached) | GC: 19.9ms)
+
+
+Started GET "/" for 192.168.107.1 at 2026-03-03 20:41:15 +0000
+Processing by PostsController#index as */*
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mWpPost Load (1.2ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' ORDER BY `wp_posts`.`post_date` DESC LIMIT 10 /*action='index',application='App',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:4
+  Rendered posts/index.html.erb within layouts/application (Duration: 8.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.6ms | GC: 0.0ms)
+Completed 200 OK in 14ms (Views: 10.8ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 192.168.107.1 at 2026-03-03 20:41:32 +0000
+Processing by PostsController#index as */*
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mWpPost Load (9.6ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' ORDER BY `wp_posts`.`post_date` DESC LIMIT 10 /*action='index',application='App',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:4
+  Rendered posts/index.html.erb within layouts/application (Duration: 26.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 33.2ms | GC: 0.0ms)
+Completed 200 OK in 45ms (Views: 27.5ms | ActiveRecord: 9.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mWpPost Pluck (1.2ms)[0m  [1m[34mSELECT `wp_posts`.`ID` FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' LIMIT 1 /*application='App'*/[0m
+Started GET "/posts/2" for 192.168.107.1 at 2026-03-03 20:42:12 +0000
+Processing by PostsController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mWpPost Load (2.1ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' AND `wp_posts`.`ID` = 2 LIMIT 1 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/controllers/posts_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 5.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.4ms | GC: 0.0ms)
+Completed 200 OK in 35ms (Views: 12.6ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 192.168.107.1 at 2026-03-03 20:51:23 +0000
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mWpPost Load (9.9ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' ORDER BY `wp_posts`.`post_date` DESC LIMIT 10 /*action='index',application='App',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:4
+  Rendered posts/index.html.erb within layouts/application (Duration: 504.1ms | GC: 298.8ms)
+  Rendered layout layouts/application.html.erb (Duration: 511.3ms | GC: 300.4ms)
+Completed 200 OK in 527ms (Views: 495.3ms | ActiveRecord: 19.8ms (1 query, 0 cached) | GC: 300.4ms)
+
+
+Started GET "/posts/2" for 192.168.107.1 at 2026-03-03 20:51:26 +0000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mWpPost Load (1.7ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' AND `wp_posts`.`ID` = 2 LIMIT 1 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/controllers/posts_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 2.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 89.1ms | GC: 1.6ms)
+Completed 200 OK in 100ms (Views: 92.3ms | ActiveRecord: 1.6ms (1 query, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/posts/2" for 192.168.107.1 at 2026-03-03 20:51:29 +0000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mWpPost Load (6.2ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' AND `wp_posts`.`ID` = 2 LIMIT 1 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/controllers/posts_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | GC: 1.7ms)
+Completed 200 OK in 21ms (Views: 8.3ms | ActiveRecord: 6.2ms (1 query, 0 cached) | GC: 1.7ms)
+
+
+Started GET "/" for 192.168.107.1 at 2026-03-03 20:51:32 +0000
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mWpPost Load (2.1ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' ORDER BY `wp_posts`.`post_date` DESC LIMIT 10 /*action='index',application='App',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:4
+  Rendered posts/index.html.erb within layouts/application (Duration: 5.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.0ms | GC: 0.9ms)
+Completed 200 OK in 14ms (Views: 10.2ms | ActiveRecord: 2.1ms (1 query, 0 cached) | GC: 0.9ms)
+
+
+Started GET "/posts/2" for 192.168.107.1 at 2026-03-03 20:51:33 +0000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mWpPost Load (1.8ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' AND `wp_posts`.`ID` = 2 LIMIT 1 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/controllers/posts_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 1.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.4ms | GC: 0.0ms)
+Completed 200 OK in 12ms (Views: 4.8ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts/1" for 192.168.107.1 at 2026-03-03 20:51:34 +0000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mWpPost Load (0.7ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' AND `wp_posts`.`ID` = 1 LIMIT 1 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/controllers/posts_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 1.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 1.3ms)
+Completed 200 OK in 12ms (Views: 6.2ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 2.6ms)
+
+
+Started GET "/" for 192.168.107.1 at 2026-03-03 20:51:36 +0000
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mWpPost Load (1.7ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' ORDER BY `wp_posts`.`post_date` DESC LIMIT 10 /*action='index',application='App',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:4
+  Rendered posts/index.html.erb within layouts/application (Duration: 6.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.7ms | GC: 1.6ms)
+Completed 200 OK in 14ms (Views: 10.3ms | ActiveRecord: 1.7ms (1 query, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/posts/1" for 192.168.107.1 at 2026-03-03 20:51:38 +0000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mWpPost Load (1.4ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' AND `wp_posts`.`ID` = 1 LIMIT 1 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/controllers/posts_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.4ms | GC: 0.6ms)
+Completed 200 OK in 12ms (Views: 4.6ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/" for 192.168.107.1 at 2026-03-03 20:51:39 +0000
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mWpPost Load (0.7ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' ORDER BY `wp_posts`.`post_date` DESC LIMIT 10 /*action='index',application='App',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:4
+  Rendered posts/index.html.erb within layouts/application (Duration: 5.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.5ms | GC: 0.0ms)
+Completed 200 OK in 10ms (Views: 7.7ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/posts/2" for 192.168.107.1 at 2026-03-03 20:51:48 +0000
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mWpPost Load (1.2ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' AND `wp_posts`.`ID` = 2 LIMIT 1 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/controllers/posts_controller.rb:7:in `show'
+  Rendering layout layouts/application.html.erb
+  Rendering posts/show.html.erb within layouts/application
+  Rendered posts/show.html.erb within layouts/application (Duration: 0.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.6ms | GC: 0.0ms)
+Completed 200 OK in 11ms (Views: 4.5ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 192.168.107.1 at 2026-03-03 20:51:49 +0000
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mWpPost Load (0.8ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' ORDER BY `wp_posts`.`post_date` DESC LIMIT 10 /*action='index',application='App',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:4
+  Rendered posts/index.html.erb within layouts/application (Duration: 4.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.4ms | GC: 0.0ms)
+Completed 200 OK in 11ms (Views: 8.1ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 192.168.107.1 at 2026-03-03 21:05:28 +0000
+Processing by PostsController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering posts/index.html.erb within layouts/application
+  [1m[36mWpPost Load (9.0ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' ORDER BY `wp_posts`.`post_date` DESC LIMIT 10 /*action='index',application='App',controller='posts'*/[0m
+  ↳ app/views/posts/index.html.erb:4
+  Rendered posts/index.html.erb within layouts/application (Duration: 210.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 221.2ms | GC: 0.0ms)
+Completed 200 OK in 251ms (Views: 215.8ms | ActiveRecord: 20.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/@vite/client" for 192.168.107.1 at 2026-03-03 21:05:28 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/@vite/client"):
+  
