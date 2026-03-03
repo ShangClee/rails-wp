@@ -1,0 +1,933 @@
+  [1m[36mWpUser Count (53.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_users` /*application='App'*/[0m
+  [1m[36mWpUser Load (0.9ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` ORDER BY `wp_users`.`ID` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPost Count (2.0ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_posts` /*application='App'*/[0m
+  [1m[36mWpPost Load (0.3ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` ORDER BY `wp_posts`.`ID` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Count (1.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_options` /*application='App'*/[0m
+  [1m[36mWpOption Load (0.5ms)[0m  [1m[34mSELECT `wp_options`.* FROM `wp_options` WHERE `wp_options`.`option_name` = 'siteurl' LIMIT 1 /*application='App'*/[0m
+  ↳ app/models/wp_option.rb:9:in `get'
+  [1m[36mWpOption Load (0.2ms)[0m  [1m[34mSELECT `wp_options`.* FROM `wp_options` WHERE `wp_options`.`option_name` = 'blogname' LIMIT 1 /*application='App'*/[0m
+  ↳ app/models/wp_option.rb:9:in `get'
+  [1m[36mWpTerm Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_terms` /*application='App'*/[0m
+  [1m[36mWpTerm Load (0.3ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` ORDER BY `wp_terms`.`term_id` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpComment Count (1.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_comments` /*application='App'*/[0m
+  [1m[36mWpComment Load (0.4ms)[0m  [1m[34mSELECT `wp_comments`.* FROM `wp_comments` ORDER BY `wp_comments`.`comment_ID` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[35m (57.2ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) /*application='App'*/[0m
+  [1m[35m (39.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'siteurl' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('siteurl', 'http://localhost:3000', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'home' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (4.6ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('home', 'http://localhost:3000', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'blogname' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.2ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('blogname', 'My Rails WP Site', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'blogdescription' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.2ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('blogdescription', 'Just another WordPress site', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'users_can_register' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('users_can_register', '0', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'admin_email' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (7.1ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('admin_email', 'admin@example.com', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'start_of_week' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.4ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('start_of_week', '1', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'use_balanceTags' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.6ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('use_balanceTags', '0', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'use_smilies' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (3.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('use_smilies', '1', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'require_name_email' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.0ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('require_name_email', '1', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (5.7ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'comments_notify' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (5.3ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('comments_notify', '1', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'posts_per_page' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('posts_per_page', '10', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (4.7ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'date_format' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('date_format', 'F j, Y', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'time_format' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('time_format', 'g:i a', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'links_updated_date_format' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('links_updated_date_format', 'F j, Y g:i a', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'comment_moderation' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.8ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('comment_moderation', '0', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'moderation_notify' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.8ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('moderation_notify', '1', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'permalink_structure' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.7ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('permalink_structure', '/%year%/%monthnum%/%day%/%postname%/', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'rewrite_rules' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`option_name`, `option_value`, `autoload`) VALUES ('rewrite_rules', '', 'yes') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_login` = 'admin' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_users` (`user_login`, `user_pass`, `user_nicename`, `user_email`, `user_url`, `user_registered`, `user_activation_key`, `user_status`, `display_name`) VALUES ('admin', '$P$B55D6LjfHDkINU5wF.v2BuuzO0/XPk/', 'admin', 'admin@example.com', 'http://localhost:3000', '2026-03-03 04:38:22', '', 0, 'admin') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (1.8ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (3.3ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'wp_capabilities', 'a:1:{s:13:\"administrator\";b:1;}') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (1.0ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (2.8ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'wp_user_level', '10') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (1.6ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (2.5ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'nickname', 'admin') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (1.3ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'first_name', 'Admin') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (1.1ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (1.5ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`user_id`, `meta_key`, `meta_value`) VALUES (1, 'last_name', 'User') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTerm Create (4.3ms)[0m  [1m[32mINSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Uncategorized', 'uncategorized', 0) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTerm Load (1.3ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` WHERE `wp_terms`.`term_id` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_term_taxonomy` (`term_id`, `taxonomy`, `description`, `parent`, `count`) VALUES (1, 'category', '', 0, 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpPost Create (3.3ms)[0m  [1m[32mINSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES (1, '2026-03-03 04:38:23', '2026-03-03 04:38:23', 'Welcome to WordPress. This is your first post. Edit or delete it, then start writing!', 'Hello world!', '', 'publish', 'open', 'open', '', 'hello-world', '', '', '2026-03-03 04:38:23', '2026-03-03 04:38:23', '', 0, 'http://localhost:3000/?p=1', 0, 'post', '', 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Load (1.2ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` WHERE `wp_term_taxonomy`.`term_taxonomy_id` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPost Load (0.2ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermRelationship Create (6.2ms)[0m  [1m[32mINSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_order`) VALUES (1, 1, 0) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpPost Load (1.4ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPostmeta Create (2.6ms)[0m  [1m[32mINSERT INTO `wp_postmeta` (`post_id`, `meta_key`, `meta_value`) VALUES (1, '_wp_page_template', 'default') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpPost Create (2.8ms)[0m  [1m[32mINSERT INTO `wp_posts` (`post_author`, `post_date`, `post_date_gmt`, `post_content`, `post_title`, `post_excerpt`, `post_status`, `comment_status`, `ping_status`, `post_password`, `post_name`, `to_ping`, `pinged`, `post_modified`, `post_modified_gmt`, `post_content_filtered`, `post_parent`, `guid`, `menu_order`, `post_type`, `post_mime_type`, `comment_count`) VALUES (1, '2026-03-03 04:38:23', '2026-03-03 04:38:23', 'This is an example page. It differs from a blog post because it will stay in one place and will show up in your site navigation (in most themes).', 'Sample Page', '', 'publish', 'open', 'open', '', 'sample-page', '', '', '2026-03-03 04:38:23', '2026-03-03 04:38:23', '', 0, 'http://localhost:3000/?page_id=2', 0, 'page', '', 0) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpPost Load (1.4ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpComment Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_comments` (`comment_post_ID`, `comment_author`, `comment_author_email`, `comment_author_url`, `comment_author_IP`, `comment_date`, `comment_date_gmt`, `comment_content`, `comment_karma`, `comment_approved`, `comment_agent`, `comment_type`, `comment_parent`, `user_id`) VALUES (1, 'A WordPress Commenter', 'wapuu@wordpress.example', 'https://wordpress.org/', '127.0.0.1', '2026-03-03 04:38:23', '2026-03-03 04:38:23', 'Hi, this is a comment. To get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.', 0, '1', 'Mozilla/5.0', 'comment', 0, 0) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mWpUser Count (3.1ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_users` /*application='App'*/[0m
+  [1m[36mWpUser Load (0.3ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` ORDER BY `wp_users`.`ID` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 /*application='App'*/[0m
+  [1m[36mWpPost Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_posts` /*application='App'*/[0m
+  [1m[36mWpPost Load (0.3ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` ORDER BY `wp_posts`.`ID` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Load (0.4ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPostmeta Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = 1 /*application='App'*/[0m
+  [1m[36mWpOption Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_options` /*application='App'*/[0m
+  [1m[36mWpOption Load (0.3ms)[0m  [1m[34mSELECT `wp_options`.* FROM `wp_options` WHERE `wp_options`.`option_name` = 'siteurl' LIMIT 1 /*application='App'*/[0m
+  ↳ app/models/wp_option.rb:9:in `get'
+  [1m[36mWpOption Load (0.6ms)[0m  [1m[34mSELECT `wp_options`.* FROM `wp_options` WHERE `wp_options`.`option_name` = 'blogname' LIMIT 1 /*application='App'*/[0m
+  ↳ app/models/wp_option.rb:9:in `get'
+  [1m[36mWpTerm Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_terms` /*application='App'*/[0m
+  [1m[36mWpTerm Load (0.2ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` ORDER BY `wp_terms`.`term_id` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Load (0.2ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` WHERE `wp_term_taxonomy`.`term_id` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPost Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_posts` INNER JOIN `wp_term_relationships` ON `wp_posts`.`ID` = `wp_term_relationships`.`object_id` WHERE `wp_term_relationships`.`term_taxonomy_id` = 1 /*application='App'*/[0m
+  [1m[36mWpComment Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_comments` /*application='App'*/[0m
+  [1m[36mWpComment Load (0.2ms)[0m  [1m[34mSELECT `wp_comments`.* FROM `wp_comments` ORDER BY `wp_comments`.`comment_ID` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPost Load (0.4ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Count (226.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_users` /*application='App'*/[0m
+  [1m[36mWpUser Load (1.1ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` ORDER BY `wp_users`.`ID` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 /*application='App'*/[0m
+  [1m[36mWpPost Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_posts` /*application='App'*/[0m
+  [1m[36mWpPost Load (0.8ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` ORDER BY `wp_posts`.`ID` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Load (0.4ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPostmeta Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = 1 /*application='App'*/[0m
+  [1m[36mWpOption Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_options` /*application='App'*/[0m
+  [1m[36mWpOption Load (0.7ms)[0m  [1m[34mSELECT `wp_options`.* FROM `wp_options` WHERE `wp_options`.`option_name` = 'siteurl' LIMIT 1 /*application='App'*/[0m
+  ↳ app/models/wp_option.rb:9:in `get'
+  [1m[36mWpOption Load (0.5ms)[0m  [1m[34mSELECT `wp_options`.* FROM `wp_options` WHERE `wp_options`.`option_name` = 'blogname' LIMIT 1 /*application='App'*/[0m
+  ↳ app/models/wp_option.rb:9:in `get'
+  [1m[36mWpTerm Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_terms` /*application='App'*/[0m
+  [1m[36mWpTerm Load (0.6ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` ORDER BY `wp_terms`.`term_id` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Load (0.3ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` WHERE `wp_term_taxonomy`.`term_id` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPost Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_posts` INNER JOIN `wp_term_relationships` ON `wp_posts`.`ID` = `wp_term_relationships`.`object_id` WHERE `wp_term_relationships`.`term_taxonomy_id` = 1 /*application='App'*/[0m
+  [1m[36mWpComment Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_comments` /*application='App'*/[0m
+  [1m[36mWpComment Load (1.4ms)[0m  [1m[34mSELECT `wp_comments`.* FROM `wp_comments` ORDER BY `wp_comments`.`comment_ID` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPost Load (0.6ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT GET_LOCK('7789987128210140280', 0) /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (5.8ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (22.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-03-03 05:10:27.357168', '2026-03-03 05:10:27.357171') /*application='App'*/[0m
+Migrating to AddIndexesToWordpressTables (20260303051001)
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE INDEX `index_wp_posts_on_post_type` ON `wp_posts` (`post_type`) /*application='App'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('7789987128210140280') /*application='App'*/[0m
+  [1m[36mWpPost Load (1.7ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' LIMIT 1000 /*application='App'*/[0m
+  ↳ lib/tasks/wordpress.rake:9:in `map'
+  [1m[36mWpPostmeta Load (0.9ms)[0m  [1m[34mSELECT `wp_postmeta`.* FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` IN (1, 2) /*application='App'*/[0m
+  ↳ lib/tasks/wordpress.rake:9:in `map'
+  [1m[36mWpUser Load (1.7ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 /*application='App'*/[0m
+  ↳ lib/tasks/wordpress.rake:9:in `map'
+  [1m[36mWpTermRelationship Load (1.1ms)[0m  [1m[34mSELECT `wp_term_relationships`.* FROM `wp_term_relationships` WHERE `wp_term_relationships`.`object_id` IN (1, 2) /*application='App'*/[0m
+  ↳ lib/tasks/wordpress.rake:9:in `map'
+  [1m[36mWpTermTaxonomy Load (0.3ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` WHERE `wp_term_taxonomy`.`term_taxonomy_id` = 1 /*application='App'*/[0m
+  ↳ lib/tasks/wordpress.rake:9:in `map'
+  [1m[36mWpTerm Load (0.5ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` WHERE `wp_terms`.`term_id` = 1 /*application='App'*/[0m
+  ↳ lib/tasks/wordpress.rake:9:in `map'
+  [1m[36mWpTermTaxonomy Load (0.5ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` INNER JOIN `wp_term_relationships` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` WHERE `wp_term_relationships`.`object_id` = 1 AND `wp_term_taxonomy`.`taxonomy` = 'category' /*application='App'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:17:in `map'
+  [1m[36mWpTerm Load (0.2ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` WHERE `wp_terms`.`term_id` = 1 LIMIT 1 /*application='App'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:19:in `block (2 levels) in <class:WpPostSerializer>'
+  [1m[36mWpTermTaxonomy Load (0.3ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` INNER JOIN `wp_term_relationships` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` WHERE `wp_term_relationships`.`object_id` = 1 AND `wp_term_taxonomy`.`taxonomy` = 'post_tag' /*application='App'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:27:in `map'
+  [1m[36mWpTermTaxonomy Load (0.2ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` INNER JOIN `wp_term_relationships` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` WHERE `wp_term_relationships`.`object_id` = 2 AND `wp_term_taxonomy`.`taxonomy` = 'category' /*application='App'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:17:in `map'
+  [1m[36mWpTermTaxonomy Load (0.2ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` INNER JOIN `wp_term_relationships` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` WHERE `wp_term_relationships`.`object_id` = 2 AND `wp_term_taxonomy`.`taxonomy` = 'post_tag' /*application='App'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:27:in `map'
+  [1m[36mWpPost Count (47.9ms)[0m  [1m[34mSELECT COUNT(*) FROM (SELECT 1 AS one FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' LIMIT 1000) subquery_for_count /*application='App'*/[0m
+  ↳ lib/tasks/wordpress.rake:14:in `block (2 levels) in <main>'
+  [1m[36mWpUser Load (3.4ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` /*application='App'*/[0m
+  ↳ lib/tasks/wordpress.rake:27:in `block (3 levels) in <main>'
+  [1m[36mWpUsermeta Load (0.4ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 AND `wp_usermeta`.`meta_key` = 'wp_capabilities' LIMIT 1 /*application='App'*/[0m
+  ↳ app/models/wp_user.rb:28:in `get_meta'
+  [1m[36mWpUser Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM `wp_users` /*application='App'*/[0m
+  ↳ lib/tasks/wordpress.rake:39:in `block (2 levels) in <main>'
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[35m (17.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS `hanmitravel_test` /*application='App'*/[0m
+  [1m[35m (13.9ms)[0m  [1m[35mCREATE DATABASE `hanmitravel_test` DEFAULT CHARACTER SET `utf8mb4` /*application='App'*/[0m
+  [1m[35m (9.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_commentmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (58.6ms)[0m  [1m[35mCREATE TABLE `wp_commentmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_id` bigint unsigned DEFAULT 0 NOT NULL, `meta_key` varchar(255), `meta_value` longtext, INDEX `comment_id` (`comment_id`), INDEX `meta_key` (`meta_key`(191))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (6.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_comments` CASCADE /*application='App'*/[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCREATE TABLE `wp_comments` (`comment_ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_agent` varchar(255) DEFAULT '' NOT NULL, `comment_approved` varchar(20) DEFAULT '1' NOT NULL, `comment_author` tinytext NOT NULL, `comment_author_IP` varchar(100) DEFAULT '' NOT NULL, `comment_author_email` varchar(100) DEFAULT '' NOT NULL, `comment_author_url` varchar(200) DEFAULT '' NOT NULL, `comment_content` text NOT NULL, `comment_date` datetime NOT NULL, `comment_date_gmt` datetime NOT NULL, `comment_karma` int DEFAULT 0 NOT NULL, `comment_parent` bigint unsigned DEFAULT 0 NOT NULL, `comment_post_ID` bigint unsigned DEFAULT 0 NOT NULL, `comment_type` varchar(20) DEFAULT 'comment' NOT NULL, `user_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `comment_approved_date_gmt` (`comment_approved`, `comment_date_gmt`), INDEX `comment_author_email` (`comment_author_email`(10)), INDEX `comment_date_gmt` (`comment_date_gmt`), INDEX `comment_parent` (`comment_parent`), INDEX `comment_post_ID` (`comment_post_ID`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_links` CASCADE /*application='App'*/[0m
+  [1m[35m (6.7ms)[0m  [1m[35mCREATE TABLE `wp_links` (`link_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `link_description` varchar(255) DEFAULT '' NOT NULL, `link_image` varchar(255) DEFAULT '' NOT NULL, `link_name` varchar(255) DEFAULT '' NOT NULL, `link_notes` mediumtext NOT NULL, `link_owner` bigint unsigned DEFAULT 1 NOT NULL, `link_rating` int DEFAULT 0 NOT NULL, `link_rel` varchar(255) DEFAULT '' NOT NULL, `link_rss` varchar(255) DEFAULT '' NOT NULL, `link_target` varchar(25) DEFAULT '' NOT NULL, `link_updated` datetime NOT NULL, `link_url` varchar(255) DEFAULT '' NOT NULL, `link_visible` varchar(20) DEFAULT 'Y' NOT NULL, INDEX `link_visible` (`link_visible`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_options` CASCADE /*application='App'*/[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE `wp_options` (`option_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `autoload` varchar(20) DEFAULT 'yes' NOT NULL, `option_name` varchar(191) DEFAULT '' NOT NULL, `option_value` longtext NOT NULL, INDEX `autoload` (`autoload`), UNIQUE INDEX `option_name` (`option_name`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_postmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE `wp_postmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `post_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `post_id` (`post_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_posts` CASCADE /*application='App'*/[0m
+  [1m[35m (6.8ms)[0m  [1m[35mCREATE TABLE `wp_posts` (`ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_count` bigint DEFAULT 0 NOT NULL, `comment_status` varchar(20) DEFAULT 'open' NOT NULL, `guid` varchar(255) DEFAULT '' NOT NULL, `menu_order` int DEFAULT 0 NOT NULL, `ping_status` varchar(20) DEFAULT 'open' NOT NULL, `pinged` text NOT NULL, `post_author` bigint unsigned DEFAULT 0 NOT NULL, `post_content` longtext NOT NULL, `post_content_filtered` longtext NOT NULL, `post_date` datetime NOT NULL, `post_date_gmt` datetime NOT NULL, `post_excerpt` text NOT NULL, `post_mime_type` varchar(100) DEFAULT '' NOT NULL, `post_modified` datetime NOT NULL, `post_modified_gmt` datetime NOT NULL, `post_name` varchar(200) DEFAULT '' NOT NULL, `post_parent` bigint unsigned DEFAULT 0 NOT NULL, `post_password` varchar(255) DEFAULT '' NOT NULL, `post_status` varchar(20) DEFAULT 'publish' NOT NULL, `post_title` text NOT NULL, `post_type` varchar(20) DEFAULT 'post' NOT NULL, `to_ping` text NOT NULL, INDEX `post_author` (`post_author`), INDEX `post_name` (`post_name`(191)), INDEX `post_parent` (`post_parent`), INDEX `type_status_author` (`post_type`, `post_status`, `post_author`), INDEX `type_status_date` (`post_type`, `post_status`, `post_date`, `ID`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_term_relationships` CASCADE /*application='App'*/[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE `wp_term_relationships` (`object_id` bigint unsigned DEFAULT 0 NOT NULL, `term_order` int DEFAULT 0 NOT NULL, `term_taxonomy_id` bigint unsigned DEFAULT 0 NOT NULL, PRIMARY KEY (`object_id`, `term_taxonomy_id`), INDEX `term_taxonomy_id` (`term_taxonomy_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_term_taxonomy` CASCADE /*application='App'*/[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE `wp_term_taxonomy` (`term_taxonomy_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `count` bigint DEFAULT 0 NOT NULL, `description` longtext NOT NULL, `parent` bigint unsigned DEFAULT 0 NOT NULL, `taxonomy` varchar(32) DEFAULT '' NOT NULL, `term_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `taxonomy` (`taxonomy`), UNIQUE INDEX `term_id_taxonomy` (`term_id`, `taxonomy`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_termmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE `wp_termmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `term_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `term_id` (`term_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_terms` CASCADE /*application='App'*/[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE `wp_terms` (`term_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(200) DEFAULT '' NOT NULL, `slug` varchar(200) DEFAULT '' NOT NULL, `term_group` bigint DEFAULT 0 NOT NULL, INDEX `name` (`name`(191)), INDEX `slug` (`slug`(191))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_usermeta` CASCADE /*application='App'*/[0m
+  [1m[35m (4.9ms)[0m  [1m[35mCREATE TABLE `wp_usermeta` (`umeta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `user_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (1.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_users` CASCADE /*application='App'*/[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE `wp_users` (`ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `display_name` varchar(250) DEFAULT '' NOT NULL, `user_activation_key` varchar(255) DEFAULT '' NOT NULL, `user_email` varchar(100) DEFAULT '' NOT NULL, `user_login` varchar(60) DEFAULT '' NOT NULL, `user_nicename` varchar(50) DEFAULT '' NOT NULL, `user_pass` varchar(255) DEFAULT '' NOT NULL, `user_registered` datetime NOT NULL, `user_status` int DEFAULT 0 NOT NULL, `user_url` varchar(100) DEFAULT '' NOT NULL, INDEX `user_email` (`user_email`), INDEX `user_login_key` (`user_login`), INDEX `user_nicename` (`user_nicename`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (30.9ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[35m (4.0ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (0) /*application='App'*/[0m
+  [1m[35m (28.4ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-03-03 05:19:43.827203', '2026-03-03 05:19:43.827207') /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (3.3ms)[0m  [1m[33mUPDATE `ar_internal_metadata` SET `ar_internal_metadata`.`value` = 'test', `ar_internal_metadata`.`updated_at` = '2026-03-03 05:19:43.834687' WHERE `ar_internal_metadata`.`key` = 'environment' /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (9.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', 'c02cdb4d995e0288de349b28157fbaa8c8ead6aa', '2026-03-03 05:19:43.839389', '2026-03-03 05:19:43.839392') /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[35m (211.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS `hanmitravel_test` /*application='App'*/[0m
+  [1m[35m (17.3ms)[0m  [1m[35mCREATE DATABASE `hanmitravel_test` DEFAULT CHARACTER SET `utf8mb4` /*application='App'*/[0m
+  [1m[35m (8.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_commentmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (12.4ms)[0m  [1m[35mCREATE TABLE `wp_commentmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_id` bigint unsigned DEFAULT 0 NOT NULL, `meta_key` varchar(255), `meta_value` longtext, INDEX `comment_id` (`comment_id`), INDEX `meta_key` (`meta_key`(191))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (3.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_comments` CASCADE /*application='App'*/[0m
+  [1m[35m (10.5ms)[0m  [1m[35mCREATE TABLE `wp_comments` (`comment_ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_agent` varchar(255) DEFAULT '' NOT NULL, `comment_approved` varchar(20) DEFAULT '1' NOT NULL, `comment_author` tinytext NOT NULL, `comment_author_IP` varchar(100) DEFAULT '' NOT NULL, `comment_author_email` varchar(100) DEFAULT '' NOT NULL, `comment_author_url` varchar(200) DEFAULT '' NOT NULL, `comment_content` text NOT NULL, `comment_date` datetime NOT NULL, `comment_date_gmt` datetime NOT NULL, `comment_karma` int DEFAULT 0 NOT NULL, `comment_parent` bigint unsigned DEFAULT 0 NOT NULL, `comment_post_ID` bigint unsigned DEFAULT 0 NOT NULL, `comment_type` varchar(20) DEFAULT 'comment' NOT NULL, `user_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `comment_approved_date_gmt` (`comment_approved`, `comment_date_gmt`), INDEX `comment_author_email` (`comment_author_email`(10)), INDEX `comment_date_gmt` (`comment_date_gmt`), INDEX `comment_parent` (`comment_parent`), INDEX `comment_post_ID` (`comment_post_ID`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_links` CASCADE /*application='App'*/[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE `wp_links` (`link_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `link_description` varchar(255) DEFAULT '' NOT NULL, `link_image` varchar(255) DEFAULT '' NOT NULL, `link_name` varchar(255) DEFAULT '' NOT NULL, `link_notes` mediumtext NOT NULL, `link_owner` bigint unsigned DEFAULT 1 NOT NULL, `link_rating` int DEFAULT 0 NOT NULL, `link_rel` varchar(255) DEFAULT '' NOT NULL, `link_rss` varchar(255) DEFAULT '' NOT NULL, `link_target` varchar(25) DEFAULT '' NOT NULL, `link_updated` datetime NOT NULL, `link_url` varchar(255) DEFAULT '' NOT NULL, `link_visible` varchar(20) DEFAULT 'Y' NOT NULL, INDEX `link_visible` (`link_visible`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.6ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_options` CASCADE /*application='App'*/[0m
+  [1m[35m (54.7ms)[0m  [1m[35mCREATE TABLE `wp_options` (`option_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `autoload` varchar(20) DEFAULT 'yes' NOT NULL, `option_name` varchar(191) DEFAULT '' NOT NULL, `option_value` longtext NOT NULL, INDEX `autoload` (`autoload`), UNIQUE INDEX `option_name` (`option_name`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (4.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_postmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (10.1ms)[0m  [1m[35mCREATE TABLE `wp_postmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `post_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `post_id` (`post_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (4.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_posts` CASCADE /*application='App'*/[0m
+  [1m[35m (21.4ms)[0m  [1m[35mCREATE TABLE `wp_posts` (`ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_count` bigint DEFAULT 0 NOT NULL, `comment_status` varchar(20) DEFAULT 'open' NOT NULL, `guid` varchar(255) DEFAULT '' NOT NULL, `menu_order` int DEFAULT 0 NOT NULL, `ping_status` varchar(20) DEFAULT 'open' NOT NULL, `pinged` text NOT NULL, `post_author` bigint unsigned DEFAULT 0 NOT NULL, `post_content` longtext NOT NULL, `post_content_filtered` longtext NOT NULL, `post_date` datetime NOT NULL, `post_date_gmt` datetime NOT NULL, `post_excerpt` text NOT NULL, `post_mime_type` varchar(100) DEFAULT '' NOT NULL, `post_modified` datetime NOT NULL, `post_modified_gmt` datetime NOT NULL, `post_name` varchar(200) DEFAULT '' NOT NULL, `post_parent` bigint unsigned DEFAULT 0 NOT NULL, `post_password` varchar(255) DEFAULT '' NOT NULL, `post_status` varchar(20) DEFAULT 'publish' NOT NULL, `post_title` text NOT NULL, `post_type` varchar(20) DEFAULT 'post' NOT NULL, `to_ping` text NOT NULL, INDEX `post_author` (`post_author`), INDEX `post_name` (`post_name`(191)), INDEX `post_parent` (`post_parent`), INDEX `type_status_author` (`post_type`, `post_status`, `post_author`), INDEX `type_status_date` (`post_type`, `post_status`, `post_date`, `ID`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (4.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_term_relationships` CASCADE /*application='App'*/[0m
+  [1m[35m (16.0ms)[0m  [1m[35mCREATE TABLE `wp_term_relationships` (`object_id` bigint unsigned DEFAULT 0 NOT NULL, `term_order` int DEFAULT 0 NOT NULL, `term_taxonomy_id` bigint unsigned DEFAULT 0 NOT NULL, PRIMARY KEY (`object_id`, `term_taxonomy_id`), INDEX `term_taxonomy_id` (`term_taxonomy_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_term_taxonomy` CASCADE /*application='App'*/[0m
+  [1m[35m (56.8ms)[0m  [1m[35mCREATE TABLE `wp_term_taxonomy` (`term_taxonomy_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `count` bigint DEFAULT 0 NOT NULL, `description` longtext NOT NULL, `parent` bigint unsigned DEFAULT 0 NOT NULL, `taxonomy` varchar(32) DEFAULT '' NOT NULL, `term_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `taxonomy` (`taxonomy`), UNIQUE INDEX `term_id_taxonomy` (`term_id`, `taxonomy`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (6.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_termmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (20.0ms)[0m  [1m[35mCREATE TABLE `wp_termmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `term_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `term_id` (`term_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (3.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_terms` CASCADE /*application='App'*/[0m
+  [1m[35m (14.0ms)[0m  [1m[35mCREATE TABLE `wp_terms` (`term_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(200) DEFAULT '' NOT NULL, `slug` varchar(200) DEFAULT '' NOT NULL, `term_group` bigint DEFAULT 0 NOT NULL, INDEX `name` (`name`(191)), INDEX `slug` (`slug`(191))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (11.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_usermeta` CASCADE /*application='App'*/[0m
+  [1m[35m (9.5ms)[0m  [1m[35mCREATE TABLE `wp_usermeta` (`umeta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `user_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (5.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_users` CASCADE /*application='App'*/[0m
+  [1m[35m (11.3ms)[0m  [1m[35mCREATE TABLE `wp_users` (`ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `display_name` varchar(250) DEFAULT '' NOT NULL, `user_activation_key` varchar(255) DEFAULT '' NOT NULL, `user_email` varchar(100) DEFAULT '' NOT NULL, `user_login` varchar(60) DEFAULT '' NOT NULL, `user_nicename` varchar(50) DEFAULT '' NOT NULL, `user_pass` varchar(255) DEFAULT '' NOT NULL, `user_registered` datetime NOT NULL, `user_status` int DEFAULT 0 NOT NULL, `user_url` varchar(100) DEFAULT '' NOT NULL, INDEX `user_email` (`user_email`), INDEX `user_login_key` (`user_login`), INDEX `user_nicename` (`user_nicename`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (52.4ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[35m (12.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (0) /*application='App'*/[0m
+  [1m[35m (49.3ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.5ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (4.2ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-03-03 05:21:36.117148', '2026-03-03 05:21:36.117152') /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Update (6.4ms)[0m  [1m[33mUPDATE `ar_internal_metadata` SET `ar_internal_metadata`.`value` = 'test', `ar_internal_metadata`.`updated_at` = '2026-03-03 05:21:36.124912' WHERE `ar_internal_metadata`.`key` = 'environment' /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.0ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', 'c02cdb4d995e0288de349b28157fbaa8c8ead6aa', '2026-03-03 05:21:36.133186', '2026-03-03 05:21:36.133189') /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[35m (186.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS `hanmitravel` /*application='App'*/[0m
+  [1m[35m (11.1ms)[0m  [1m[35mCREATE DATABASE `hanmitravel` DEFAULT CHARACTER SET `utf8mb4` /*application='App'*/[0m
+  [1m[35m (10.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_commentmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (10.1ms)[0m  [1m[35mCREATE TABLE `wp_commentmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_id` bigint unsigned DEFAULT 0 NOT NULL, `meta_key` varchar(255), `meta_value` longtext, INDEX `comment_id` (`comment_id`), INDEX `meta_key` (`meta_key`(191))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (5.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_comments` CASCADE /*application='App'*/[0m
+  [1m[35m (13.2ms)[0m  [1m[35mCREATE TABLE `wp_comments` (`comment_ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_agent` varchar(255) DEFAULT '' NOT NULL, `comment_approved` varchar(20) DEFAULT '1' NOT NULL, `comment_author` tinytext NOT NULL, `comment_author_IP` varchar(100) DEFAULT '' NOT NULL, `comment_author_email` varchar(100) DEFAULT '' NOT NULL, `comment_author_url` varchar(200) DEFAULT '' NOT NULL, `comment_content` text NOT NULL, `comment_date` datetime NOT NULL, `comment_date_gmt` datetime NOT NULL, `comment_karma` int DEFAULT 0 NOT NULL, `comment_parent` bigint unsigned DEFAULT 0 NOT NULL, `comment_post_ID` bigint unsigned DEFAULT 0 NOT NULL, `comment_type` varchar(20) DEFAULT 'comment' NOT NULL, `user_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `comment_approved_date_gmt` (`comment_approved`, `comment_date_gmt`), INDEX `comment_author_email` (`comment_author_email`(10)), INDEX `comment_date_gmt` (`comment_date_gmt`), INDEX `comment_parent` (`comment_parent`), INDEX `comment_post_ID` (`comment_post_ID`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (3.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_links` CASCADE /*application='App'*/[0m
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE TABLE `wp_links` (`link_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `link_description` varchar(255) DEFAULT '' NOT NULL, `link_image` varchar(255) DEFAULT '' NOT NULL, `link_name` varchar(255) DEFAULT '' NOT NULL, `link_notes` mediumtext NOT NULL, `link_owner` bigint unsigned DEFAULT 1 NOT NULL, `link_rating` int DEFAULT 0 NOT NULL, `link_rel` varchar(255) DEFAULT '' NOT NULL, `link_rss` varchar(255) DEFAULT '' NOT NULL, `link_target` varchar(25) DEFAULT '' NOT NULL, `link_updated` datetime NOT NULL, `link_url` varchar(255) DEFAULT '' NOT NULL, `link_visible` varchar(20) DEFAULT 'Y' NOT NULL, INDEX `link_visible` (`link_visible`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (3.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_options` CASCADE /*application='App'*/[0m
+  [1m[35m (12.1ms)[0m  [1m[35mCREATE TABLE `wp_options` (`option_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `autoload` varchar(20) DEFAULT 'yes' NOT NULL, `option_name` varchar(191) DEFAULT '' NOT NULL, `option_value` longtext NOT NULL, INDEX `autoload` (`autoload`), UNIQUE INDEX `option_name` (`option_name`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.3ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_postmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE `wp_postmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `post_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `post_id` (`post_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (7.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_posts` CASCADE /*application='App'*/[0m
+  [1m[35m (8.3ms)[0m  [1m[35mCREATE TABLE `wp_posts` (`ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_count` bigint DEFAULT 0 NOT NULL, `comment_status` varchar(20) DEFAULT 'open' NOT NULL, `guid` varchar(255) DEFAULT '' NOT NULL, `menu_order` int DEFAULT 0 NOT NULL, `ping_status` varchar(20) DEFAULT 'open' NOT NULL, `pinged` text NOT NULL, `post_author` bigint unsigned DEFAULT 0 NOT NULL, `post_content` longtext NOT NULL, `post_content_filtered` longtext NOT NULL, `post_date` datetime NOT NULL, `post_date_gmt` datetime NOT NULL, `post_excerpt` text NOT NULL, `post_mime_type` varchar(100) DEFAULT '' NOT NULL, `post_modified` datetime NOT NULL, `post_modified_gmt` datetime NOT NULL, `post_name` varchar(200) DEFAULT '' NOT NULL, `post_parent` bigint unsigned DEFAULT 0 NOT NULL, `post_password` varchar(255) DEFAULT '' NOT NULL, `post_status` varchar(20) DEFAULT 'publish' NOT NULL, `post_title` text NOT NULL, `post_type` varchar(20) DEFAULT 'post' NOT NULL, `to_ping` text NOT NULL, INDEX `post_author` (`post_author`), INDEX `post_name` (`post_name`(191)), INDEX `post_parent` (`post_parent`), INDEX `type_status_author` (`post_type`, `post_status`, `post_author`), INDEX `type_status_date` (`post_type`, `post_status`, `post_date`, `ID`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_term_relationships` CASCADE /*application='App'*/[0m
+  [1m[35m (6.1ms)[0m  [1m[35mCREATE TABLE `wp_term_relationships` (`object_id` bigint unsigned DEFAULT 0 NOT NULL, `term_order` int DEFAULT 0 NOT NULL, `term_taxonomy_id` bigint unsigned DEFAULT 0 NOT NULL, PRIMARY KEY (`object_id`, `term_taxonomy_id`), INDEX `term_taxonomy_id` (`term_taxonomy_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (1.9ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_term_taxonomy` CASCADE /*application='App'*/[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE `wp_term_taxonomy` (`term_taxonomy_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `count` bigint DEFAULT 0 NOT NULL, `description` longtext NOT NULL, `parent` bigint unsigned DEFAULT 0 NOT NULL, `taxonomy` varchar(32) DEFAULT '' NOT NULL, `term_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `taxonomy` (`taxonomy`), UNIQUE INDEX `term_id_taxonomy` (`term_id`, `taxonomy`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_termmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE `wp_termmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `term_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `term_id` (`term_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_terms` CASCADE /*application='App'*/[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE `wp_terms` (`term_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(200) DEFAULT '' NOT NULL, `slug` varchar(200) DEFAULT '' NOT NULL, `term_group` bigint DEFAULT 0 NOT NULL, INDEX `name` (`name`(191)), INDEX `slug` (`slug`(191))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_usermeta` CASCADE /*application='App'*/[0m
+  [1m[35m (5.5ms)[0m  [1m[35mCREATE TABLE `wp_usermeta` (`umeta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `user_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_users` CASCADE /*application='App'*/[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE `wp_users` (`ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `display_name` varchar(250) DEFAULT '' NOT NULL, `user_activation_key` varchar(255) DEFAULT '' NOT NULL, `user_email` varchar(100) DEFAULT '' NOT NULL, `user_login` varchar(60) DEFAULT '' NOT NULL, `user_nicename` varchar(50) DEFAULT '' NOT NULL, `user_pass` varchar(255) DEFAULT '' NOT NULL, `user_registered` datetime NOT NULL, `user_status` int DEFAULT 0 NOT NULL, `user_url` varchar(100) DEFAULT '' NOT NULL, INDEX `user_email` (`user_email`), INDEX `user_login_key` (`user_login`), INDEX `user_nicename` (`user_nicename`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (30.1ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[35m (4.6ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (0) /*application='App'*/[0m
+  [1m[35m (66.5ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.7ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-03-03 05:24:59.850644', '2026-03-03 05:24:59.850647') /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (6.5ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', 'c02cdb4d995e0288de349b28157fbaa8c8ead6aa', '2026-03-03 05:24:59.862388', '2026-03-03 05:24:59.862389') /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'siteurl' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (4.8ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'siteurl', 'http://localhost:3000') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'home' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (4.0ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'home', 'http://localhost:3000') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'blogname' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.0ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'blogname', 'My Rails WP Site') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'blogdescription' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (3.3ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'blogdescription', 'Just another WordPress site') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'users_can_register' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (14.6ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'users_can_register', '0') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'admin_email' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.2ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'admin_email', 'admin@example.com') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'start_of_week' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.5ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'start_of_week', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'use_balanceTags' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (6.4ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'use_balanceTags', '0') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'use_smilies' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'use_smilies', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'require_name_email' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.6ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'require_name_email', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (2.7ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'comments_notify' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.7ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'comments_notify', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'posts_per_page' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.3ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'posts_per_page', '10') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'date_format' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'date_format', 'F j, Y') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'time_format' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.4ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'time_format', 'g:i a') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'links_updated_date_format' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.4ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'links_updated_date_format', 'F j, Y g:i a') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'comment_moderation' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'comment_moderation', '0') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'moderation_notify' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'moderation_notify', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'permalink_structure' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.7ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'permalink_structure', '/%year%/%monthnum%/%day%/%postname%/') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'rewrite_rules' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.2ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'rewrite_rules', '') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Exists? (1.3ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_login` = 'admin' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' LIMIT 1 /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[35m (187.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS `hanmitravel` /*application='App'*/[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE DATABASE `hanmitravel` DEFAULT CHARACTER SET `utf8mb4` /*application='App'*/[0m
+  [1m[35m (5.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_commentmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE `wp_commentmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_id` bigint unsigned DEFAULT 0 NOT NULL, `meta_key` varchar(255), `meta_value` longtext, INDEX `comment_id` (`comment_id`), INDEX `meta_key` (`meta_key`(191))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_comments` CASCADE /*application='App'*/[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE TABLE `wp_comments` (`comment_ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_agent` varchar(255) DEFAULT '' NOT NULL, `comment_approved` varchar(20) DEFAULT '1' NOT NULL, `comment_author` tinytext NOT NULL, `comment_author_IP` varchar(100) DEFAULT '' NOT NULL, `comment_author_email` varchar(100) DEFAULT '' NOT NULL, `comment_author_url` varchar(200) DEFAULT '' NOT NULL, `comment_content` text NOT NULL, `comment_date` datetime NOT NULL, `comment_date_gmt` datetime NOT NULL, `comment_karma` int DEFAULT 0 NOT NULL, `comment_parent` bigint unsigned DEFAULT 0 NOT NULL, `comment_post_ID` bigint unsigned DEFAULT 0 NOT NULL, `comment_type` varchar(20) DEFAULT 'comment' NOT NULL, `user_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `comment_approved_date_gmt` (`comment_approved`, `comment_date_gmt`), INDEX `comment_author_email` (`comment_author_email`(10)), INDEX `comment_date_gmt` (`comment_date_gmt`), INDEX `comment_parent` (`comment_parent`), INDEX `comment_post_ID` (`comment_post_ID`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.0ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_links` CASCADE /*application='App'*/[0m
+  [1m[35m (7.5ms)[0m  [1m[35mCREATE TABLE `wp_links` (`link_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `link_description` varchar(255) DEFAULT '' NOT NULL, `link_image` varchar(255) DEFAULT '' NOT NULL, `link_name` varchar(255) DEFAULT '' NOT NULL, `link_notes` mediumtext NOT NULL, `link_owner` bigint unsigned DEFAULT 1 NOT NULL, `link_rating` int DEFAULT 0 NOT NULL, `link_rel` varchar(255) DEFAULT '' NOT NULL, `link_rss` varchar(255) DEFAULT '' NOT NULL, `link_target` varchar(25) DEFAULT '' NOT NULL, `link_updated` datetime NOT NULL, `link_url` varchar(255) DEFAULT '' NOT NULL, `link_visible` varchar(20) DEFAULT 'Y' NOT NULL, INDEX `link_visible` (`link_visible`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (3.2ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_options` CASCADE /*application='App'*/[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE `wp_options` (`option_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `autoload` varchar(20) DEFAULT 'yes' NOT NULL, `option_name` varchar(191) DEFAULT '' NOT NULL, `option_value` longtext NOT NULL, INDEX `autoload` (`autoload`), UNIQUE INDEX `option_name` (`option_name`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_postmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE `wp_postmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `post_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `post_id` (`post_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.1ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_posts` CASCADE /*application='App'*/[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE `wp_posts` (`ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `comment_count` bigint DEFAULT 0 NOT NULL, `comment_status` varchar(20) DEFAULT 'open' NOT NULL, `guid` varchar(255) DEFAULT '' NOT NULL, `menu_order` int DEFAULT 0 NOT NULL, `ping_status` varchar(20) DEFAULT 'open' NOT NULL, `pinged` text NOT NULL, `post_author` bigint unsigned DEFAULT 0 NOT NULL, `post_content` longtext NOT NULL, `post_content_filtered` longtext NOT NULL, `post_date` datetime NOT NULL, `post_date_gmt` datetime NOT NULL, `post_excerpt` text NOT NULL, `post_mime_type` varchar(100) DEFAULT '' NOT NULL, `post_modified` datetime NOT NULL, `post_modified_gmt` datetime NOT NULL, `post_name` varchar(200) DEFAULT '' NOT NULL, `post_parent` bigint unsigned DEFAULT 0 NOT NULL, `post_password` varchar(255) DEFAULT '' NOT NULL, `post_status` varchar(20) DEFAULT 'publish' NOT NULL, `post_title` text NOT NULL, `post_type` varchar(20) DEFAULT 'post' NOT NULL, `to_ping` text NOT NULL, INDEX `post_author` (`post_author`), INDEX `post_name` (`post_name`(191)), INDEX `post_parent` (`post_parent`), INDEX `type_status_author` (`post_type`, `post_status`, `post_author`), INDEX `type_status_date` (`post_type`, `post_status`, `post_date`, `ID`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (1.7ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_term_relationships` CASCADE /*application='App'*/[0m
+  [1m[35m (5.8ms)[0m  [1m[35mCREATE TABLE `wp_term_relationships` (`object_id` bigint unsigned DEFAULT 0 NOT NULL, `term_order` int DEFAULT 0 NOT NULL, `term_taxonomy_id` bigint unsigned DEFAULT 0 NOT NULL, PRIMARY KEY (`object_id`, `term_taxonomy_id`), INDEX `term_taxonomy_id` (`term_taxonomy_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_term_taxonomy` CASCADE /*application='App'*/[0m
+  [1m[35m (5.6ms)[0m  [1m[35mCREATE TABLE `wp_term_taxonomy` (`term_taxonomy_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `count` bigint DEFAULT 0 NOT NULL, `description` longtext NOT NULL, `parent` bigint unsigned DEFAULT 0 NOT NULL, `taxonomy` varchar(32) DEFAULT '' NOT NULL, `term_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `taxonomy` (`taxonomy`), UNIQUE INDEX `term_id_taxonomy` (`term_id`, `taxonomy`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_termmeta` CASCADE /*application='App'*/[0m
+  [1m[35m (4.5ms)[0m  [1m[35mCREATE TABLE `wp_termmeta` (`meta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `term_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `term_id` (`term_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (1.5ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_terms` CASCADE /*application='App'*/[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE `wp_terms` (`term_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `name` varchar(200) DEFAULT '' NOT NULL, `slug` varchar(200) DEFAULT '' NOT NULL, `term_group` bigint DEFAULT 0 NOT NULL, INDEX `name` (`name`(191)), INDEX `slug` (`slug`(191))) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_usermeta` CASCADE /*application='App'*/[0m
+  [1m[35m (6.4ms)[0m  [1m[35mCREATE TABLE `wp_usermeta` (`umeta_id` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `meta_key` varchar(255), `meta_value` longtext, `user_id` bigint unsigned DEFAULT 0 NOT NULL, INDEX `meta_key` (`meta_key`(191)), INDEX `user_id` (`user_id`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (2.4ms)[0m  [1m[35mDROP TABLE IF EXISTS `wp_users` CASCADE /*application='App'*/[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE `wp_users` (`ID` bigint unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, `display_name` varchar(250) DEFAULT '' NOT NULL, `user_activation_key` varchar(255) DEFAULT '' NOT NULL, `user_email` varchar(100) DEFAULT '' NOT NULL, `user_login` varchar(60) DEFAULT '' NOT NULL, `user_nicename` varchar(50) DEFAULT '' NOT NULL, `user_pass` varchar(255) DEFAULT '' NOT NULL, `user_registered` datetime NOT NULL, `user_status` int DEFAULT 0 NOT NULL, `user_url` varchar(100) DEFAULT '' NOT NULL, INDEX `user_email` (`user_email`), INDEX `user_login_key` (`user_login`), INDEX `user_nicename` (`user_nicename`)) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci ENGINE=MyISAM /*application='App'*/[0m
+  [1m[35m (27.1ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY) /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[35m (2.9ms)[0m  [1m[32mINSERT INTO `schema_migrations` (version) VALUES (0) /*application='App'*/[0m
+  [1m[35m (31.7ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL) /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (3.9ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2026-03-03 05:25:30.666583', '2026-03-03 05:25:30.666587') /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'schema_sha1' ORDER BY `ar_internal_metadata`.`key` ASC LIMIT 1 /*application='App'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (5.8ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('schema_sha1', 'c02cdb4d995e0288de349b28157fbaa8c8ead6aa', '2026-03-03 05:25:30.674602', '2026-03-03 05:25:30.674604') /*application='App'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'siteurl' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.5ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'siteurl', 'http://localhost:3000') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'home' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'home', 'http://localhost:3000') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'blogname' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.6ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'blogname', 'My Rails WP Site') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'blogdescription' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'blogdescription', 'Just another WordPress site') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'users_can_register' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.8ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'users_can_register', '0') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'admin_email' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.3ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'admin_email', 'admin@example.com') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'start_of_week' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'start_of_week', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'use_balanceTags' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.6ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'use_balanceTags', '0') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'use_smilies' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (5.4ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'use_smilies', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'require_name_email' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'require_name_email', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.8ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'comments_notify' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.2ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'comments_notify', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'posts_per_page' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'posts_per_page', '10') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'date_format' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'date_format', 'F j, Y') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'time_format' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'time_format', 'g:i a') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'links_updated_date_format' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (2.0ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'links_updated_date_format', 'F j, Y g:i a') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'comment_moderation' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.8ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'comment_moderation', '0') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'moderation_notify' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'moderation_notify', '1') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'permalink_structure' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.6ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'permalink_structure', '/%year%/%monthnum%/%day%/%postname%/') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpOption Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_options` WHERE `wp_options`.`option_name` = 'rewrite_rules' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpOption Create (1.9ms)[0m  [1m[32mINSERT INTO `wp_options` (`autoload`, `option_name`, `option_value`) VALUES ('yes', 'rewrite_rules', '') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_login` = 'admin' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Create (3.1ms)[0m  [1m[32mINSERT INTO `wp_users` (`display_name`, `user_activation_key`, `user_email`, `user_login`, `user_nicename`, `user_pass`, `user_registered`, `user_status`, `user_url`) VALUES ('admin', '', 'admin@example.com', 'admin', 'admin', '$2a$12$kDOaq98TVgHKBOmKPIdZK.VZARWa4pi/V4SIxzA86VQ.VwmiI/zIy', '2026-03-03 05:25:30', 0, 'http://localhost:3000') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (2.1ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (3.2ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`meta_key`, `meta_value`, `user_id`) VALUES ('wp_capabilities', 'a:1:{s:13:\"administrator\";b:1;}', 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (1.4ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (4.6ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`meta_key`, `meta_value`, `user_id`) VALUES ('wp_user_level', '10', 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (2.9ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (34.8ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`meta_key`, `meta_value`, `user_id`) VALUES ('nickname', 'admin', 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (1.5ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (3.3ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`meta_key`, `meta_value`, `user_id`) VALUES ('first_name', 'Admin', 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Load (5.4ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUsermeta Create (2.1ms)[0m  [1m[32mINSERT INTO `wp_usermeta` (`meta_key`, `meta_value`, `user_id`) VALUES ('last_name', 'User', 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTerm Create (5.6ms)[0m  [1m[32mINSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('Uncategorized', 'uncategorized', 0) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTerm Load (1.5ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` WHERE `wp_terms`.`term_id` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Create (2.9ms)[0m  [1m[32mINSERT INTO `wp_term_taxonomy` (`count`, `description`, `parent`, `taxonomy`, `term_id`) VALUES (1, '', 0, 'category', 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpPost Create (3.5ms)[0m  [1m[32mINSERT INTO `wp_posts` (`comment_count`, `comment_status`, `guid`, `menu_order`, `ping_status`, `pinged`, `post_author`, `post_content`, `post_content_filtered`, `post_date`, `post_date_gmt`, `post_excerpt`, `post_mime_type`, `post_modified`, `post_modified_gmt`, `post_name`, `post_parent`, `post_password`, `post_status`, `post_title`, `post_type`, `to_ping`) VALUES (1, 'open', 'http://localhost:3000/?p=1', 0, 'open', '', 1, 'Welcome to WordPress. This is your first post. Edit or delete it, then start writing!', '', '2026-03-03 05:25:31', '2026-03-03 05:25:31', '', '', '2026-03-03 05:25:31', '2026-03-03 05:25:31', 'hello-world', 0, '', 'publish', 'Hello world!', 'post', '') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Load (1.5ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` WHERE `wp_term_taxonomy`.`term_taxonomy_id` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPost Load (0.3ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermRelationship Create (2.3ms)[0m  [1m[32mINSERT INTO `wp_term_relationships` (`object_id`, `term_order`, `term_taxonomy_id`) VALUES (1, 0, 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpPost Load (1.4ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPostmeta Create (2.7ms)[0m  [1m[32mINSERT INTO `wp_postmeta` (`meta_key`, `meta_value`, `post_id`) VALUES ('_wp_page_template', 'default', 1) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpPost Create (3.3ms)[0m  [1m[32mINSERT INTO `wp_posts` (`comment_count`, `comment_status`, `guid`, `menu_order`, `ping_status`, `pinged`, `post_author`, `post_content`, `post_content_filtered`, `post_date`, `post_date_gmt`, `post_excerpt`, `post_mime_type`, `post_modified`, `post_modified_gmt`, `post_name`, `post_parent`, `post_password`, `post_status`, `post_title`, `post_type`, `to_ping`) VALUES (0, 'open', 'http://localhost:3000/?page_id=2', 0, 'open', '', 1, 'This is an example page. It differs from a blog post because it will stay in one place and will show up in your site navigation (in most themes).', '', '2026-03-03 05:25:31', '2026-03-03 05:25:31', '', '', '2026-03-03 05:25:31', '2026-03-03 05:25:31', 'sample-page', 0, '', 'publish', 'Sample Page', 'page', '') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpPost Load (1.6ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpComment Create (2.8ms)[0m  [1m[32mINSERT INTO `wp_comments` (`comment_agent`, `comment_approved`, `comment_author`, `comment_author_IP`, `comment_author_email`, `comment_author_url`, `comment_content`, `comment_date`, `comment_date_gmt`, `comment_karma`, `comment_parent`, `comment_post_ID`, `comment_type`, `user_id`) VALUES ('Mozilla/5.0', '1', 'A WordPress Commenter', '127.0.0.1', 'wapuu@wordpress.example', 'https://wordpress.org/', 'Hi, this is a comment. To get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.', '2026-03-03 05:25:31', '2026-03-03 05:25:31', 0, 0, 1, 'comment', 0) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mWpUser Load (0.5ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' LIMIT 1 /*application='App'*/[0m
+Started GET "/" for 192.168.107.1 at 2026-03-03 05:34:08 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/bundle/ruby/3.2.0/gems/railties-8.1.2/libtemplates/rails/welcome/index.html.erb
+  Rendered /usr/local/bundle/ruby/3.2.0/gems/railties-8.1.2/libtemplates/rails/welcome/index.html.erb (Duration: 0.6ms | GC: 0.0ms)
+Completed 200 OK in 29ms (Views: 9.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v2/login" for 192.168.107.1 at 2026-03-03 05:35:42 +0000
+Processing by Api::V2::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+Completed 401 Unauthorized in 8ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mWpUser Load (0.6ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Load (0.4ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' LIMIT 1 /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_login` = 'admin' AND `wp_users`.`ID` != 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' AND `wp_users`.`ID` != 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK /*application='App'*/[0m
+  [1m[36mWpUser Load (0.4ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' LIMIT 1 /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_login` = 'admin' AND `wp_users`.`ID` != 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' AND `wp_users`.`ID` != 1 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpUser Update (30.1ms)[0m  [1m[33mUPDATE `wp_users` SET `wp_users`.`user_pass` = '$2a$12$EKP41MdO7MFZMBVZlyUDteuyX4d/qEsSZOiVSHRH6t.4ry5OVRy2O' WHERE `wp_users`.`ID` = 1 /*application='App'*/[0m
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+Started POST "/api/v2/login" for 192.168.107.1 at 2026-03-03 05:37:30 +0000
+Processing by Api::V2::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `rememberable_options' for WpUser:Class):
+  
+activerecord (8.1.2) lib/active_record/dynamic_matchers.rb:24:in `method_missing'
+devise (5.0.2) lib/devise/strategies/rememberable.rb:56:in `remember_key'
+devise (5.0.2) lib/devise/strategies/rememberable.rb:60:in `remember_cookie'
+devise (5.0.2) lib/devise/strategies/rememberable.rb:15:in `valid?'
+warden (1.2.9) lib/warden/proxy.rb:367:in `block in _run_strategies_for'
+warden (1.2.9) lib/warden/proxy.rb:365:in `each'
+warden (1.2.9) lib/warden/proxy.rb:365:in `_run_strategies_for'
+warden (1.2.9) lib/warden/proxy.rb:335:in `_perform_authentication'
+warden (1.2.9) lib/warden/proxy.rb:133:in `authenticate!'
+devise (5.0.2) app/controllers/devise/sessions_controller.rb:19:in `create'
+actionpack (8.1.2) lib/action_controller/metal/basic_implicit_render.rb:8:in `send_action'
+actionpack (8.1.2) lib/abstract_controller/base.rb:221:in `process_action'
+actionpack (8.1.2) lib/action_controller/metal/rendering.rb:199:in `process_action'
+actionpack (8.1.2) lib/abstract_controller/callbacks.rb:267:in `block in process_action'
+activesupport (8.1.2) lib/active_support/callbacks.rb:110:in `run_callbacks'
+actionpack (8.1.2) lib/abstract_controller/callbacks.rb:266:in `process_action'
+actionpack (8.1.2) lib/action_controller/metal/rescue.rb:36:in `process_action'
+actionpack (8.1.2) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.1.2) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.1.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.1.2) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.1.2) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.1.2) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.1.2) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.1.2) lib/abstract_controller/base.rb:154:in `process'
+actionpack (8.1.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.1.2) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:65:in `dispatch'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.1.2) lib/action_dispatch/routing/mapper.rb:32:in `block in <class:Constraints>'
+actionpack (8.1.2) lib/action_dispatch/routing/mapper.rb:62:in `serve'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:35:in `block in serve'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:86:in `block in recognize'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:66:in `each'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:66:in `recognize'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:31:in `serve'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:906:in `call'
+railties (8.1.2) lib/rails/engine/lazy_route_set.rb:60:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware/token_dispatcher.rb:20:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware/revocation_manager.rb:21:in `call'
+rack (3.2.5) lib/rack/builder.rb:283:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware.rb:22:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.2.5) lib/rack/etag.rb:29:in `call'
+rack (3.2.5) lib/rack/conditional_get.rb:44:in `call'
+rack (3.2.5) lib/rack/head.rb:15:in `call'
+activerecord (8.1.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.1.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (8.1.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.1.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.1.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/remote_ip.rb:98:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.5) lib/rack/runtime.rb:24:in `call'
+activesupport (8.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:30:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.5) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.1.2) lib/rails/engine.rb:534:in `call'
+puma (7.2.0) lib/puma/configuration.rb:296:in `call'
+puma (7.2.0) lib/puma/request.rb:103:in `block in handle_request'
+puma (7.2.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.2.0) lib/puma/request.rb:102:in `handle_request'
+puma (7.2.0) lib/puma/server.rb:503:in `process_client'
+puma (7.2.0) lib/puma/server.rb:262:in `block in run'
+puma (7.2.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+Started POST "/api/v2/login" for 192.168.107.1 at 2026-03-03 05:37:56 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC /*application='App'*/[0m
+Processing by Api::V2::SessionsController#create as JSON
+  Parameters: {"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/api/v2/login" for 192.168.107.1 at 2026-03-03 05:38:20 +0000
+Processing by Api::V2::SessionsController#create as JSON
+  Parameters: {"wp_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"wp_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mWpUser Load (0.5ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' ORDER BY `wp_users`.`ID` ASC LIMIT 1 /*action='create',application='App',controller='sessions'*/[0m
+  [1m[36mWpUsermeta Load (0.9ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 AND `wp_usermeta`.`meta_key` = 'wp_capabilities' LIMIT 1 /*action='create',application='App',controller='sessions'*/[0m
+  ↳ app/models/wp_user.rb:28:in `get_meta'
+  [1m[36mWpUsermeta Load (0.3ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 /*action='create',application='App',controller='sessions'*/[0m
+  ↳ app/serializers/wp_user_serializer.rb:14:in `each_with_object'
+Completed 200 OK in 447ms (Views: 0.6ms | ActiveRecord: 18.5ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/api/v2/posts" for 192.168.107.1 at 2026-03-03 05:38:21 +0000
+Processing by Api::V2::PostsController#create as */*
+  Parameters: {"post"=>{"post_title"=>"Phase 7 Verification Post", "post_content"=>"This is a test post created during verification.", "post_status"=>"publish"}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+NoMethodError (undefined method `authenticate_user!' for #<Api::V2::PostsController:0x00000000010338>):
+  
+railties (8.1.2) lib/rails/engine/lazy_route_set.rb:96:in `method_missing'
+activesupport (8.1.2) lib/active_support/callbacks.rb:362:in `block in make_lambda'
+activesupport (8.1.2) lib/active_support/callbacks.rb:179:in `block in call'
+actionpack (8.1.2) lib/abstract_controller/callbacks.rb:36:in `block (2 levels) in <module:Callbacks>'
+activesupport (8.1.2) lib/active_support/callbacks.rb:180:in `call'
+activesupport (8.1.2) lib/active_support/callbacks.rb:560:in `block in invoke_before'
+activesupport (8.1.2) lib/active_support/callbacks.rb:560:in `each'
+activesupport (8.1.2) lib/active_support/callbacks.rb:560:in `invoke_before'
+activesupport (8.1.2) lib/active_support/callbacks.rb:109:in `run_callbacks'
+actionpack (8.1.2) lib/abstract_controller/callbacks.rb:266:in `process_action'
+actionpack (8.1.2) lib/action_controller/metal/rescue.rb:36:in `process_action'
+actionpack (8.1.2) lib/action_controller/metal/instrumentation.rb:76:in `block in process_action'
+activesupport (8.1.2) lib/active_support/notifications.rb:210:in `block in instrument'
+activesupport (8.1.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (8.1.2) lib/active_support/notifications.rb:210:in `instrument'
+actionpack (8.1.2) lib/action_controller/metal/instrumentation.rb:75:in `process_action'
+actionpack (8.1.2) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (8.1.2) lib/active_record/railties/controller_runtime.rb:39:in `process_action'
+actionpack (8.1.2) lib/abstract_controller/base.rb:154:in `process'
+actionpack (8.1.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (8.1.2) lib/action_controller/metal.rb:335:in `dispatch'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:65:in `dispatch'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:50:in `serve'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:35:in `block in serve'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:86:in `block in recognize'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:66:in `each'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:66:in `recognize'
+actionpack (8.1.2) lib/action_dispatch/journey/router.rb:31:in `serve'
+actionpack (8.1.2) lib/action_dispatch/routing/route_set.rb:906:in `call'
+railties (8.1.2) lib/rails/engine/lazy_route_set.rb:60:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware/token_dispatcher.rb:20:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware/revocation_manager.rb:21:in `call'
+rack (3.2.5) lib/rack/builder.rb:283:in `call'
+warden-jwt_auth (0.12.0) lib/warden/jwt_auth/middleware.rb:22:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (3.2.5) lib/rack/etag.rb:29:in `call'
+rack (3.2.5) lib/rack/conditional_get.rb:44:in `call'
+rack (3.2.5) lib/rack/head.rb:15:in `call'
+activerecord (8.1.2) lib/active_record/migration.rb:671:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.1.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (8.1.2) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.1.2) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.1.2) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/remote_ip.rb:98:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.2.5) lib/rack/runtime.rb:24:in `call'
+activesupport (8.1.2) lib/active_support/cache/strategy/local_cache_middleware.rb:30:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.1.2) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/executor.rb:20:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.2.5) lib/rack/sendfile.rb:131:in `call'
+actionpack (8.1.2) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.1.2) lib/rails/engine.rb:534:in `call'
+puma (7.2.0) lib/puma/configuration.rb:296:in `call'
+puma (7.2.0) lib/puma/request.rb:103:in `block in handle_request'
+puma (7.2.0) lib/puma/thread_pool.rb:355:in `with_force_shutdown'
+puma (7.2.0) lib/puma/request.rb:102:in `handle_request'
+puma (7.2.0) lib/puma/server.rb:503:in `process_client'
+puma (7.2.0) lib/puma/server.rb:262:in `block in run'
+puma (7.2.0) lib/puma/thread_pool.rb:182:in `block in spawn_thread'
+Started POST "/api/v2/login" for 192.168.107.1 at 2026-03-03 05:38:56 +0000
+Processing by Api::V2::SessionsController#create as JSON
+  Parameters: {"wp_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"wp_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mWpUser Load (6.1ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' ORDER BY `wp_users`.`ID` ASC LIMIT 1 /*action='create',application='App',controller='sessions'*/[0m
+  [1m[36mWpUsermeta Load (0.3ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 AND `wp_usermeta`.`meta_key` = 'wp_capabilities' LIMIT 1 /*action='create',application='App',controller='sessions'*/[0m
+  ↳ app/models/wp_user.rb:28:in `get_meta'
+  [1m[36mWpUsermeta Load (0.2ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 /*action='create',application='App',controller='sessions'*/[0m
+  ↳ app/serializers/wp_user_serializer.rb:14:in `each_with_object'
+Completed 200 OK in 439ms (Views: 0.3ms | ActiveRecord: 31.5ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/api/v2/posts" for 192.168.107.1 at 2026-03-03 05:38:56 +0000
+Processing by Api::V2::PostsController#create as */*
+  Parameters: {"post"=>{"post_title"=>"Phase 7 Verification Post", "post_content"=>"This is a test post created during verification.", "post_status"=>"publish"}}
+  [1m[36mWpUser Load (0.4ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:8:in `authenticate_user!'
+  [1m[36mWpUsermeta Load (0.3ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 AND `wp_usermeta`.`meta_key` = 'wp_capabilities' LIMIT 1 /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/models/wp_user.rb:28:in `get_meta'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:44:in `create'
+  [1m[36mWpPost Create (5.0ms)[0m  [1m[32mINSERT INTO `wp_posts` (`comment_count`, `comment_status`, `guid`, `menu_order`, `ping_status`, `pinged`, `post_author`, `post_content`, `post_content_filtered`, `post_date`, `post_date_gmt`, `post_excerpt`, `post_mime_type`, `post_modified`, `post_modified_gmt`, `post_name`, `post_parent`, `post_password`, `post_status`, `post_title`, `post_type`, `to_ping`) VALUES (0, 'open', '', 0, 'open', '', 1, 'This is a test post created during verification.', '', '2026-03-03 05:38:56', '2026-03-03 05:38:56', NULL, '', '2026-03-03 05:38:56', '2026-03-03 05:38:56', '', 0, '', 'publish', 'Phase 7 Verification Post', 'post', '') /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:44:in `create'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:44:in `create'
+Completed 500 Internal Server Error in 39ms (ActiveRecord: 9.8ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActiveRecord::NotNullViolation (Mysql2::Error: Column 'post_excerpt' cannot be null)
+Caused by: Mysql2::Error (Column 'post_excerpt' cannot be null)
+
+Information for: ActiveRecord::NotNullViolation (Mysql2::Error: Column 'post_excerpt' cannot be null):
+  
+
+Information for cause: Mysql2::Error (Column 'post_excerpt' cannot be null):
+  
+app/controllers/api/v2/posts_controller.rb:44:in `create'
+Started POST "/api/v2/login" for 192.168.107.1 at 2026-03-03 05:39:39 +0000
+Processing by Api::V2::SessionsController#create as JSON
+  Parameters: {"wp_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}, "session"=>{"wp_user"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}}
+  [1m[36mWpUser Load (0.5ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`user_email` = 'admin@example.com' ORDER BY `wp_users`.`ID` ASC LIMIT 1 /*action='create',application='App',controller='sessions'*/[0m
+  [1m[36mWpUsermeta Load (0.4ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 AND `wp_usermeta`.`meta_key` = 'wp_capabilities' LIMIT 1 /*action='create',application='App',controller='sessions'*/[0m
+  ↳ app/models/wp_user.rb:28:in `get_meta'
+  [1m[36mWpUsermeta Load (0.5ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 /*action='create',application='App',controller='sessions'*/[0m
+  ↳ app/serializers/wp_user_serializer.rb:14:in `each_with_object'
+Completed 200 OK in 439ms (Views: 0.2ms | ActiveRecord: 36.3ms (3 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/api/v2/posts" for 192.168.107.1 at 2026-03-03 05:39:40 +0000
+Processing by Api::V2::PostsController#create as */*
+  Parameters: {"post"=>{"post_title"=>"Phase 7 Verification Post", "post_content"=>"This is a test post created during verification.", "post_status"=>"publish"}}
+  [1m[36mWpUser Load (0.5ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:8:in `authenticate_user!'
+  [1m[36mWpUsermeta Load (0.3ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 AND `wp_usermeta`.`meta_key` = 'wp_capabilities' LIMIT 1 /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/models/wp_user.rb:28:in `get_meta'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:44:in `create'
+  [1m[36mWpPost Create (15.8ms)[0m  [1m[32mINSERT INTO `wp_posts` (`comment_count`, `comment_status`, `guid`, `menu_order`, `ping_status`, `pinged`, `post_author`, `post_content`, `post_content_filtered`, `post_date`, `post_date_gmt`, `post_excerpt`, `post_mime_type`, `post_modified`, `post_modified_gmt`, `post_name`, `post_parent`, `post_password`, `post_status`, `post_title`, `post_type`, `to_ping`) VALUES (0, 'open', '', 0, 'open', '', 1, 'This is a test post created during verification.', '', '2026-03-03 05:39:40', '2026-03-03 05:39:40', '', '', '2026-03-03 05:39:40', '2026-03-03 05:39:40', '', 0, '', 'publish', 'Phase 7 Verification Post', 'post', '') /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:44:in `create'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:44:in `create'
+  [1m[36mWpUser Load (0.5ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:11:in `block in <class:WpPostSerializer>'
+  [1m[36mWpTermTaxonomy Load (0.5ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` INNER JOIN `wp_term_relationships` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` WHERE `wp_term_relationships`.`object_id` = 3 AND `wp_term_taxonomy`.`taxonomy` = 'category' /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:17:in `map'
+  [1m[36mWpTermTaxonomy Load (0.2ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` INNER JOIN `wp_term_relationships` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` WHERE `wp_term_relationships`.`object_id` = 3 AND `wp_term_taxonomy`.`taxonomy` = 'post_tag' /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:27:in `map'
+  [1m[36mWpPostmeta Load (0.4ms)[0m  [1m[34mSELECT `wp_postmeta`.* FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = 3 /*action='create',application='App',controller='posts'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:37:in `each_with_object'
+Completed 201 Created in 77ms (Views: 0.1ms | ActiveRecord: 26.0ms (7 queries, 0 cached) | GC: 1.2ms)
+
+
+Started GET "/api/v2/posts/3" for 192.168.107.1 at 2026-03-03 05:39:40 +0000
+Processing by Api::V2::PostsController#show as */*
+  Parameters: {"id"=>"3", "post"=>{}}
+  [1m[36mWpPost Load (0.6ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 3 LIMIT 1 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:80:in `set_post'
+  [1m[36mWpUser Load (0.3ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:11:in `block in <class:WpPostSerializer>'
+  [1m[36mWpTermTaxonomy Load (0.5ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` INNER JOIN `wp_term_relationships` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` WHERE `wp_term_relationships`.`object_id` = 3 AND `wp_term_taxonomy`.`taxonomy` = 'category' /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:17:in `map'
+  [1m[36mWpTermTaxonomy Load (0.2ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` INNER JOIN `wp_term_relationships` ON `wp_term_taxonomy`.`term_taxonomy_id` = `wp_term_relationships`.`term_taxonomy_id` WHERE `wp_term_relationships`.`object_id` = 3 AND `wp_term_taxonomy`.`taxonomy` = 'post_tag' /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:27:in `map'
+  [1m[36mWpPostmeta Load (0.1ms)[0m  [1m[34mSELECT `wp_postmeta`.* FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = 3 /*action='show',application='App',controller='posts'*/[0m
+  ↳ app/serializers/wp_post_serializer.rb:37:in `each_with_object'
+Completed 200 OK in 50ms (Views: 0.1ms | ActiveRecord: 1.7ms (5 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/graphql" for 192.168.107.1 at 2026-03-03 05:39:40 +0000
+Processing by GraphqlController#execute as */*
+  Parameters: {"query"=>"query {\n  posts(limit: 1) {\n    postTitle\n    author {\n      userLogin\n    }\n  }\n}\n", "graphql"=>{"query"=>"query {\n  posts(limit: 1) {\n    postTitle\n    author {\n      userLogin\n    }\n  }\n}\n"}}
+  [1m[36mWpUser Load (0.4ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*action='execute',application='App',controller='graphql'*/[0m
+  ↳ app/controllers/application_controller.rb:4:in `current_user'
+  [1m[36mWpPost Load (0.9ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`post_status` = 'publish' AND `wp_posts`.`post_type` = 'post' ORDER BY `wp_posts`.`post_date` DESC LIMIT 1 OFFSET 0 /*action='execute',application='App',controller='graphql',current_graphql_field='Query.posts'*/[0m
+  [1m[36mCACHE WpUser Load (0.0ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1[0m
+Completed 200 OK in 490ms (Views: 0.2ms | ActiveRecord: 1.3ms (3 queries, 1 cached) | GC: 59.4ms)
+
+
+Started DELETE "/api/v2/posts/3" for 192.168.107.1 at 2026-03-03 05:39:41 +0000
+Processing by Api::V2::PostsController#destroy as */*
+  Parameters: {"id"=>"3", "post"=>{}}
+  [1m[36mWpUser Load (0.6ms)[0m  [1m[34mSELECT `wp_users`.* FROM `wp_users` WHERE `wp_users`.`ID` = 1 LIMIT 1 /*action='destroy',application='App',controller='posts'*/[0m
+  ↳ app/controllers/application_controller.rb:8:in `authenticate_user!'
+  [1m[36mWpPost Load (0.3ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 3 LIMIT 1 /*action='destroy',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:80:in `set_post'
+  [1m[36mWpUsermeta Load (0.4ms)[0m  [1m[34mSELECT `wp_usermeta`.* FROM `wp_usermeta` WHERE `wp_usermeta`.`user_id` = 1 AND `wp_usermeta`.`meta_key` = 'wp_capabilities' LIMIT 1 /*action='destroy',application='App',controller='posts'*/[0m
+  ↳ app/models/wp_user.rb:28:in `get_meta'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*action='destroy',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:73:in `destroy'
+  [1m[36mWpPostmeta Load (1.2ms)[0m  [1m[34mSELECT `wp_postmeta`.* FROM `wp_postmeta` WHERE `wp_postmeta`.`post_id` = 3 /*action='destroy',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:73:in `destroy'
+  [1m[36mWpComment Load (0.3ms)[0m  [1m[34mSELECT `wp_comments`.* FROM `wp_comments` WHERE `wp_comments`.`comment_post_ID` = 3 /*action='destroy',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:73:in `destroy'
+  [1m[36mWpPost Destroy (7.1ms)[0m  [1m[31mDELETE FROM `wp_posts` WHERE `wp_posts`.`ID` = 3 /*action='destroy',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:73:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*action='destroy',application='App',controller='posts'*/[0m
+  ↳ app/controllers/api/v2/posts_controller.rb:73:in `destroy'
+Completed 204 No Content in 28ms (ActiveRecord: 13.5ms (6 queries, 0 cached) | GC: 0.6ms)
+
+
+  [1m[36mWpTerm Load (1.7ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` WHERE `wp_terms`.`name` = 'AI Agent' AND `wp_terms`.`slug` = 'ai-agent' LIMIT 1 /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTerm Create (38.7ms)[0m  [1m[32mINSERT INTO `wp_terms` (`name`, `slug`, `term_group`) VALUES ('AI Agent', 'ai-agent', 0) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Load (0.4ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` WHERE `wp_term_taxonomy`.`term_id` = 2 AND `wp_term_taxonomy`.`taxonomy` = 'category' LIMIT 1 /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTerm Load (1.5ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` WHERE `wp_terms`.`term_id` = 2 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Create (0.4ms)[0m  [1m[32mINSERT INTO `wp_term_taxonomy` (`count`, `description`, `parent`, `taxonomy`, `term_id`) VALUES (0, NULL, 0, 'category', 2) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK /*application='App'*/[0m
+  [1m[36mWpTerm Load (0.5ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` WHERE `wp_terms`.`name` = 'AI Agent' AND `wp_terms`.`slug` = 'ai-agent' LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Load (0.3ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` WHERE `wp_term_taxonomy`.`term_id` = 2 AND `wp_term_taxonomy`.`taxonomy` = 'category' LIMIT 1 /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTerm Load (1.3ms)[0m  [1m[34mSELECT `wp_terms`.* FROM `wp_terms` WHERE `wp_terms`.`term_id` = 2 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Create (12.6ms)[0m  [1m[32mINSERT INTO `wp_term_taxonomy` (`count`, `description`, `parent`, `taxonomy`, `term_id`) VALUES (0, '', 0, 'category', 2) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpPost Create (6.7ms)[0m  [1m[32mINSERT INTO `wp_posts` (`comment_count`, `comment_status`, `guid`, `menu_order`, `ping_status`, `pinged`, `post_author`, `post_content`, `post_content_filtered`, `post_date`, `post_date_gmt`, `post_excerpt`, `post_mime_type`, `post_modified`, `post_modified_gmt`, `post_name`, `post_parent`, `post_password`, `post_status`, `post_title`, `post_type`, `to_ping`) VALUES (0, 'closed', '', 0, 'closed', '', 1, '# WordPress 전용 Special Subagent를 LangChain + DeepAgents로 만드는 완전 가이드\n\n**hanmitravel.dothome.co.kr**을 **자동 관리하는 Deep Agent**를 만듭니다. **Subagent들이 협업**하며 WP REST API 호출합니다.\n\n[... 추가 내용은 추후 업데이트 예정 ...]\n', '', '2026-03-03 14:41:35', '2026-03-03 14:41:35', '', '', '2026-03-03 14:41:35', '2026-03-03 14:41:35', 'wp-deep-agent-guide', 0, '', 'private', 'WP Deep Agent 가이드 (비공개)', 'post', '') /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN /*application='App'*/[0m
+  [1m[36mWpTermTaxonomy Load (1.1ms)[0m  [1m[34mSELECT `wp_term_taxonomy`.* FROM `wp_term_taxonomy` WHERE `wp_term_taxonomy`.`term_taxonomy_id` = 2 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpPost Load (0.2ms)[0m  [1m[34mSELECT `wp_posts`.* FROM `wp_posts` WHERE `wp_posts`.`ID` = 4 LIMIT 1 /*application='App'*/[0m
+  [1m[36mWpTermRelationship Create (2.9ms)[0m  [1m[32mINSERT INTO `wp_term_relationships` (`object_id`, `term_order`, `term_taxonomy_id`) VALUES (4, 0, 2) /*application='App'*/[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mCOMMIT /*application='App'*/[0m

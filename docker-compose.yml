@@ -1,0 +1,41 @@
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: hanmitravel
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./WordPressInitDBv.6.9.1.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3307:3306"
+
+  redis:
+    image: redis:7.0
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    volumes:
+      - .:/rails
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: mysql2://root:password@db/hanmitravel
+      REDIS_URL: redis://redis:6379/1
+      RAILS_ENV: development
+      DEVISE_JWT_SECRET_KEY: 3b7e6f9d2a1c8b4e5f0g6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5a6b7c8d9e0f1g2h3i4j5k6l7m8n9o0p1q2r3s4t5u6v7w8x9y0z
+      SECRET_KEY_BASE: development_secret
+      RAILS_LOG_TO_STDOUT: true
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  db_data:
+  redis_data:
