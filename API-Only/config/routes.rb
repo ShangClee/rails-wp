@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
   post "/graphql", to: "graphql#execute"
   devise_for :wp_users, path: 'api/v2', path_names: {

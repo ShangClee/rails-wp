@@ -42,7 +42,7 @@ A production-ready Rails codebase built around a WordPress-compatible schema, re
     - **CMU-UI**: `http://localhost:3001/`
     - **API**: `http://localhost:3000/api/v2`
     - **GraphQL**: `http://localhost:3000/graphql` (POST)
-    - **Swagger Docs**: `http://localhost:3000/api-docs`
+    - **OpenAPI Spec**: `http://localhost:3000/api-docs/v2/swagger.yaml`
 
 ## API Documentation
 
