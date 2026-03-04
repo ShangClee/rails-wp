@@ -1,81 +1,40 @@
-# Rails WP Monorepo (API-Only + CMU-UI)
+# Rails WP Monorepo (backWP + frontWP)
 
-A production-ready Rails codebase built around a WordPress-compatible schema, reorganized into a backend `API-Only` workspace and a frontend `CMU-UI` workspace for clearer ownership and maintainability.
+A production-ready Rails codebase built around a WordPress-compatible schema, reorganized into a backend `backWP` workspace and a frontend `frontWP` workspace for clearer ownership and maintainability.
 
-## Features
+## Structure
 
-- **Legacy Compatibility**: Full ORM mapping of WordPress tables (`wp_posts`, `wp_users`, etc.).
-- **REST API v2**: Standardized JSON:API endpoints for Posts, Users, Taxonomies, and Media.
-- **GraphQL API**: Flexible query interface using `graphql-ruby`.
-- **Separated Frontend Workspace**: `CMU-UI` stores frontend pages/components/assets.
-- **Authentication**: Secure JWT-based authentication with `devise-jwt`.
-- **RBAC**: Role-Based Access Control mirroring WordPress capabilities.
-- **Caching**: Redis-based fragment and low-level caching.
-- **Documentation**: Integrated Swagger/OpenAPI documentation.
+- **Separated Backend Workspace**: `backWP` contains the Rails API-only application.
+- **Separated Frontend Workspace**: `frontWP` stores frontend pages/components/assets.
+- **Root-Level Docker Orchestration**: `docker-compose.yml` manages both services plus `db`, `redis`, and `phpmyadmin`.
 
-## Prerequisites
+## Quick Start
 
-- Docker & Docker Compose
-- Ruby 3.2+ (if running locally without Docker)
-
-## Getting Started
-
-1.  **Clone the repository**:
-    ```bash
-    git clone <repository-url>
-    cd rails-wp
-    ```
-
-2.  **Start the environment**:
-    ```bash
-    docker compose build web
-    docker compose up -d
-    ```
-
-3.  **Setup the database**:
-    The database is initialized with the WordPress schema automatically. If needed:
-    ```bash
-    docker compose exec web bundle exec rails db:migrate
-    ```
-
-4.  **Access the application**:
-    - **CMU-UI**: `http://localhost:3001/`
-    - **API**: `http://localhost:3000/api/v2`
-    - **GraphQL**: `http://localhost:3000/graphql` (POST)
-    - **OpenAPI Spec**: `http://localhost:3000/api-docs/v2/swagger.yaml`
-
-## API Documentation
-
-### REST API
-- **Posts**: `GET /api/v2/posts`
-- **Users**: `GET /api/v2/users/me`
-- **Taxonomies**: `GET /api/v2/taxonomies`
-- **Media**: `POST /api/v2/media`
-
-### GraphQL
-Query example:
-```graphql
-query {
-  posts(limit: 5) {
-    postTitle
-    author {
-      displayName
-    }
-  }
-}
+### 1. Boot Everything
+```bash
+docker compose up --build
 ```
 
-## Repository Architecture
+### 2. Access Services
+- **Frontend (frontWP)**: `http://localhost:8080/`
+- **Backend API (backWP)**: `http://localhost:8888/`
+- **Database Admin (phpMyAdmin)**: `http://localhost:8181/`
 
-- Backend workspace: [API-Only/README.md](file:///Users/shang/Prj2026/rails-wp/API-Only/README.md)
-- Frontend workspace: [CMU-UI/README.md](file:///Users/shang/Prj2026/rails-wp/CMU-UI/README.md)
-- Backend runtime config: [application.rb](file:///Users/shang/Prj2026/rails-wp/API-Only/config/application.rb)
-- Backend routes: [routes.rb](file:///Users/shang/Prj2026/rails-wp/API-Only/config/routes.rb)
+## Workspaces
 
-### Separation Rules
+- Backend workspace: [backWP/README.md](file:///Users/shang/Prj2026/rails-wp/backWP/README.md)
+- Frontend workspace: [frontWP/README.md](file:///Users/shang/Prj2026/rails-wp/frontWP/README.md)
 
-- `API-Only` owns REST/GraphQL endpoints, models, services, middleware, and utilities.
-- `CMU-UI` owns pages, components, assets, hooks, and state exports.
+## Key Files
+
+- Backend runtime config: [application.rb](file:///Users/shang/Prj2026/rails-wp/backWP/config/application.rb)
+- Backend routes: [routes.rb](file:///Users/shang/Prj2026/rails-wp/backWP/config/routes.rb)
+- Docker orchestration: [docker-compose.yml](file:///Users/shang/Prj2026/rails-wp/docker-compose.yml)
+
+## Responsibility
+
+- `backWP` owns REST/GraphQL endpoints, models, services, middleware, and utilities.
+- `frontWP` owns pages, components, assets, hooks, and state exports.
 - Cross-folder coupling is minimized through HTTP boundaries (`/api/v2`, `/graphql`).
 
 ## Management Tasks

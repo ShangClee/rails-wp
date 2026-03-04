@@ -1,0 +1,14 @@
+<article>
+  <h1 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"><%= @post.post_title %></h1>
+  <div class="mb-5 text-sm text-slate-500">
+    Published on <%= @post.post_date.strftime("%B %d, %Y") %>
+  </div>
+
+  <div class="leading-7 text-slate-800 [&_a]:text-brand-700 [&_a]:underline [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5">
+    <%= sanitize(@post.post_content) %>
+  </div>
+</article>
+
+<div class="mt-10">
+  <%= link_to "← Back to Home", root_path, class: "text-brand-700 no-underline hover:text-brand-500" %>
+</div>

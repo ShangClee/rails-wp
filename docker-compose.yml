@@ -19,20 +19,20 @@ services:
     volumes:
       - redis_data:/data
 
-  web:
-    build: ./API-Only
+  backwp:
+    build: ./backWP
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
     volumes:
-      - ./API-Only:/rails
+      - ./backWP:/rails
     ports:
-      - "3000:3000"
+      - "8888:3000"
     environment:
       DATABASE_URL: mysql2://root:password@db/wpress691
       REDIS_URL: redis://redis:6379/1
       RAILS_ENV: development
       DEVISE_JWT_SECRET_KEY: ${DEVISE_JWT_SECRET_KEY:-development_jwt_secret}
       SECRET_KEY_BASE: ${SECRET_KEY_BASE:-development_secret}
-      CMU_UI_ORIGIN: http://localhost:3001
+      CMU_UI_ORIGIN: http://localhost:8080
       RAILS_LOG_TO_STDOUT: true
     depends_on:
       - db
@@ -42,7 +42,7 @@ services:
     image: phpmyadmin:5.2.1
     platform: linux/arm64/v8
     ports:
-      - "8080:80"
+      - "8181:80"
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
@@ -51,12 +51,12 @@ services:
     depends_on:
       - db
 
-  cmu_ui:
+  frontwp:
     image: nginx:alpine
     ports:
-      - "3001:80"
+      - "8080:80"
     volumes:
-      - ./CMU-UI:/usr/share/nginx/html:ro
+      - ./frontWP:/usr/share/nginx/html:ro
 
 volumes:
   db_data:

@@ -1,6 +1,6 @@
-# API-Only
+# backWP (Rails API-Only)
 
-This folder contains the backend-only Rails application.
+This directory contains the backend Rails API-only application, formerly known as `API-Only`.
 
 ## Structure
 

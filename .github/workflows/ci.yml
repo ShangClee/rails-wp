@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: API-Only
+        working-directory: backWP
     services:
       mysql:
         image: mysql:8.0

@@ -1,0 +1,16 @@
+{
+  "name": "frontwp",
+  "version": "1.0.0",
+  "description": "This folder contains frontend-facing UI assets and page artifacts, separated from backend runtime code.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/styles/application.css -o ./assets/styles/application.tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./assets/styles/application.css -o ./assets/styles/application.tailwind.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.2.1",
+    "tailwindcss": "^4.2.1"
+  }
+}
