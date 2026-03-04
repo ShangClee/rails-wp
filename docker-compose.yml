@@ -1,10 +1,11 @@
 services:
   db:
-    image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
+    image: mariadb:10.11
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: hanmitravel
+      MYSQL_DATABASE: wpress691
+      MARIADB_ROOT_PASSWORD: password
+      MARIADB_DATABASE: wpress691
     volumes:
       - db_data:/var/lib/mysql
       - ./WordPressInitDBv.6.9.1.sql:/docker-entrypoint-initdb.d/init.sql
@@ -26,7 +27,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: mysql2://root:password@db/hanmitravel
+      DATABASE_URL: mysql2://root:password@db/wpress691
       REDIS_URL: redis://redis:6379/1
       RAILS_ENV: development
       DEVISE_JWT_SECRET_KEY: ${DEVISE_JWT_SECRET_KEY:-development_jwt_secret}
@@ -36,6 +37,19 @@ services:
     depends_on:
       - db
       - redis
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    platform: linux/arm64/v8
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: password
+    depends_on:
+      - db
 
   cmu_ui:
     image: nginx:alpine

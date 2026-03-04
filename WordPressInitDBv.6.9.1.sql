@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hanmitravel`
+-- Database: `wpress691`
 --
-CREATE DATABASE IF NOT EXISTS `hanmitravel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `hanmitravel`;
+CREATE DATABASE IF NOT EXISTS `wpress691` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_520_ci;
+USE `wpress691`;
 
 -- --------------------------------------------------------
 
