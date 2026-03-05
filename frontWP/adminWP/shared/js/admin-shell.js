@@ -1,183 +1,180 @@
-import { createInitialState, nextStateOnLogin, nextStateOnLogout, nextStateOnTabSelect, visibleTabs } from "./admin-state.js";
+const API_BASE = 'http://localhost:8888/api/v2';
 
-const API_URL = "http://localhost:8888/api/v2";
-const TAB_LABELS = { login: "Login", setup: "Setup", cms: "CMS", system: "System" };
-const MODULES = {
-  login: () => import("./modules/login.js"),
-  setup: () => import("./modules/setup.js"),
-  cms: () => import("./modules/cms.js"),
-  system: () => import("./modules/system.js"),
-};
-
-function qs(sel) { return document.querySelector(sel); }
-function qsa(sel) { return Array.from(document.querySelectorAll(sel)); }
-
-async function fetchMe(token) {
-  if (!token) return null;
-  const r = await fetch(`${API_URL}/users/me`, { headers: { Authorization: token } });
-  if (!r.ok) return null;
-  const j = await r.json();
-  return j.data?.attributes || null;
-}
-
-async function init() {
-  const urlTab = location.hash.replace("#", "") || "login";
-  const token = localStorage.getItem("jwt_token") || "";
-  const user = await fetchMe(token);
-  let state = createInitialState({ token, user, requestedTab: urlTab });
-
-  const dom = {
-    tablist: qs("#module-tablist"),
-    tabs: {
-      login: qs("#tab-login"),
-      setup: qs("#tab-setup"),
-      cms: qs("#tab-cms"),
-      system: qs("#tab-system"),
-    },
-    panels: {
-      login: qs("#panel-login"),
-      setup: qs("#panel-setup"),
-      cms: qs("#panel-cms"),
-      system: qs("#panel-system"),
-    },
-    breadcrumbCurrent: qs("#breadcrumb-current"),
-    toolbar: qs("#context-toolbar"),
-    sidebar: qs("#sidebar"),
-    backdrop: qs("#sidebar-backdrop"),
-    mobileToggle: qs("#mobile-menu-toggle"),
-  };
-
-  function setSidebarVisibility(visible) {
-    const s = dom.sidebar;
-    const b = dom.backdrop;
-    if (visible) {
-      s.classList.remove("-translate-x-full");
-      b.classList.remove("hidden");
-    } else {
-      s.classList.add("-translate-x-full");
-      b.classList.add("hidden");
-    }
-    dom.mobileToggle?.setAttribute("aria-expanded", String(visible));
+class AdminShell {
+  constructor() {
+    this.currentTab = 'cms';
+    this.currentPage = 'cms/posts';
+    this.modules = {};
+    this.init();
   }
 
-  dom.mobileToggle?.addEventListener("click", () => {
-    const isHidden = dom.sidebar.classList.contains("-translate-x-full");
-    setSidebarVisibility(isHidden);
-  });
-  
-  dom.backdrop?.addEventListener("click", () => setSidebarVisibility(false));
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") setSidebarVisibility(false);
-  });
+  init() {
+    this.setupTabs();
+    this.setupRouting();
+    this.loadModules();
+    this.handleRoute();
+  }
 
-  function applyVisibility() {
-    const allowed = new Set(visibleTabs(state));
-    Object.entries(dom.tabs).forEach(([k, el]) => {
-      el.closest("li").style.display = allowed.has(k) ? "" : "none";
+  setupTabs() {
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => this.switchTab(tab.dataset.tab));
     });
   }
 
-  function updateBreadcrumbAndToolbar() {
-    dom.breadcrumbCurrent.textContent = TAB_LABELS[state.activeTab] || state.activeTab;
-    dom.toolbar.innerHTML = "";
-    if (state.activeTab === "cms") {
-      const a = document.createElement("a");
-      a.className = "inline-flex items-center rounded border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-50";
-      a.href = "/adminWP/cms/posts.html";
-      a.textContent = "Posts";
-      dom.toolbar.appendChild(a);
-    } else if (state.activeTab === "system") {
-      const a = document.createElement("a");
-      a.className = "inline-flex items-center rounded border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-50";
-      a.href = "/adminWP/system/users.html";
-      a.textContent = "Users";
-      dom.toolbar.appendChild(a);
-    } else if (state.activeTab === "setup") {
-      const a = document.createElement("a");
-      a.className = "inline-flex items-center rounded border border-slate-300 bg-white px-3 py-1.5 text-sm font-medium hover:bg-slate-50";
-      a.href = "/adminWP/setup.html";
-      a.textContent = "Open Setup Wizard";
-      dom.toolbar.appendChild(a);
+  setupRouting() {
+    window.addEventListener('hashchange', () => this.handleRoute());
+  }
+
+  handleRoute() {
+    const hash = window.location.hash.slice(1) || 'cms/posts';
+    const [tab, page] = hash.split('/');
+    
+    if (tab === 'cms' || tab === 'system') {
+      this.currentTab = tab;
+      this.currentPage = hash;
+      this.switchTab(tab);
+      this.navigateTo(hash);
     }
   }
 
-  function updateTabSelection() {
-    Object.entries(dom.panels).forEach(([k, panel]) => {
-      if (k === state.activeTab) panel.classList.remove("hidden");
-      else panel.classList.add("hidden");
+  switchTab(tab) {
+    this.currentTab = tab;
+    
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.toggle('active', t.dataset.tab === tab);
     });
-    Object.entries(dom.tabs).forEach(([k, tab]) => {
-      const selected = k === state.activeTab;
-      tab.setAttribute("aria-selected", String(selected));
-      tab.tabIndex = selected ? 0 : -1;
-    });
-    location.hash = `#${state.activeTab}`;
-    updateBreadcrumbAndToolbar();
+
+    document.getElementById('cmsSubTabs').style.display = tab === 'cms' ? 'flex' : 'none';
+    document.getElementById('systemSubTabs').style.display = tab === 'system' ? 'flex' : 'none';
+
+    const defaultPage = tab === 'cms' ? 'cms/posts' : 'system/users';
+    this.navigateTo(defaultPage);
   }
 
-  async function ensureLoaded(tab) {
-    if (state.loadedTabs.has(tab)) return;
-    const mod = await MODULES[tab]();
-    await mod.init(dom.panels[tab], {
-      API_URL,
-      getState: () => state,
-      loginSuccess: async (payload) => {
-        localStorage.setItem("jwt_token", payload.token);
-        const me = await fetchMe(payload.token);
-        state = nextStateOnLogin(state, { token: payload.token, user: me, requestedTab: "setup" });
-        applyVisibility();
-        state.loadedTabs.add("setup");
-        updateTabSelection();
-        setSidebarVisibility(false);
-      },
-      logout: () => {
-        localStorage.removeItem("jwt_token");
-        state = nextStateOnLogout(state);
-        applyVisibility();
-        updateTabSelection();
-      },
-    });
-    state.loadedTabs.add(tab);
+  navigateTo(page) {
+    this.currentPage = page;
+    window.location.hash = page;
+    this.updateSubTabs(page);
+    this.renderPage(page);
   }
 
-  function onSelect(tab) {
-    const allowed = new Set(visibleTabs(state));
-    if (!allowed.has(tab)) return;
-    state = nextStateOnTabSelect(state, tab);
-    ensureLoaded(state.activeTab).then(() => {
-      updateTabSelection();
-      setSidebarVisibility(false);
+  updateSubTabs(page) {
+    const [tab, subPage] = page.split('/');
+    const container = tab === 'cms' ? 'cmsSubTabs' : 'systemSubTabs';
+    
+    document.querySelectorAll(`#${container} .sub-tab`).forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.page === page);
     });
   }
 
-  qsa("#module-tablist [role=tab]").forEach((tab) => {
-    tab.addEventListener("click", () => onSelect(tab.dataset.tab));
-    tab.addEventListener("keydown", (e) => {
-      const items = qsa("#module-tablist [role=tab]").filter(el => el.closest("li").style.display !== "none");
-      const idx = items.indexOf(tab);
-      if (e.key === "ArrowDown") {
-        e.preventDefault();
-        const next = items[(idx + 1) % items.length];
-        next.focus();
-      } else if (e.key === "ArrowUp") {
-        e.preventDefault();
-        const prev = items[(idx - 1 + items.length) % items.length];
-        prev.focus();
-      } else if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        onSelect(tab.dataset.tab);
+  async loadModules() {
+    const modules = [
+      'cms-posts', 'cms-pages', 'cms-media', 'cms-menus',
+      'system-users', 'system-roles', 'system-tokens', 'system-health', 'system-settings',
+      'adminWP-tests'
+    ];
+
+    for (const name of modules) {
+      try {
+        const module = await import(`./modules/${name}.js`);
+        this.modules[name] = module.default;
+      } catch (e) {
+        console.warn(`Module ${name} not found`);
       }
-    });
-  });
+    }
+  }
 
-  applyVisibility();
-  await ensureLoaded(state.activeTab);
-  updateTabSelection();
+  async renderPage(page) {
+    const content = document.getElementById('content');
+    const [section, name] = page.split('/');
+    const moduleName = `${section}-${name}`;
 
-  if (new URLSearchParams(location.search).get("test") === "1") {
-    const t = await import("./admin-tests.js");
-    t.runAdminTests();
+    if (moduleName === 'adminWP-tests') {
+      if (this.modules['adminWP-tests']) {
+        await this.modules['adminWP-tests'].runAll();
+      }
+    } else if (this.modules[moduleName]) {
+      await this.modules[moduleName](content, this);
+    } else {
+      content.innerHTML = '<p>Page not found</p>';
+    }
+  }
+
+  async apiRequest(endpoint, options = {}) {
+    const token = localStorage.getItem('jwt_token');
+    const headers = {
+      'Content-Type': 'application/json',
+      ...(token && { 'Authorization': `Bearer ${token}` }),
+      ...options.headers
+    };
+
+    try {
+      const response = await fetch(`${API_BASE}${endpoint}`, {
+        ...options,
+        headers
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+      }
+
+      return await response.json();
+    } catch (error) {
+      this.showToast(error.message, 'error');
+      throw error;
+    }
+  }
+
+  showToast(message, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    container.appendChild(toast);
+
+    setTimeout(() => toast.remove(), 3000);
+  }
+
+  renderSkeleton(rows = 5) {
+    return `
+      <div class="card">
+        <table>
+          <thead>
+            <tr>
+              <th><div class="skeleton" style="width:100px;height:16px"></div></th>
+              <th><div class="skeleton" style="width:150px;height:16px"></div></th>
+              <th><div class="skeleton" style="width:80px;height:16px"></div></th>
+            </tr>
+          </thead>
+          <tbody>
+            ${Array(rows).fill().map(() => `
+              <tr>
+                <td><div class="skeleton" style="width:100px;height:20px"></div></td>
+                <td><div class="skeleton" style="width:150px;height:20px"></div></td>
+                <td><div class="skeleton" style="width:80px;height:20px"></div></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
   }
 }
 
-init();
+function logout() {
+  localStorage.removeItem('jwt_token');
+  window.location.href = '/';
+}
+
+async function runTests() {
+  try {
+    const tests = await import('./modules/adminWP-tests.js');
+    tests.default.runAll();
+  } catch (e) {
+    console.error('Tests failed to load:', e);
+  }
+}
+
+window.AdminShell = AdminShell;
+window.runTests = runTests;
+window.adminShell = new AdminShell();
