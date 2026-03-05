@@ -56,6 +56,17 @@ Regenerate Swagger docs after modifying specs:
 docker compose exec web bundle exec rake rswag:specs:swaggerize
 ```
 
+## Setup & Installation
+
+A dedicated setup page is available to initialize the WordPress installation (create admin user and site options).
+
+-   **URL**: `http://localhost:8080/admin/setup.html`
+-   **API Endpoint**: `POST /api/v2/setup`
+-   **Features**:
+    -   Checks if WordPress is already installed.
+    -   Creates the initial administrator account.
+    -   Sets `siteurl`, `home`, `blogname`, and `admin_email` options.
+
 ## Known Issues & Limitations
 
 - **Database Indexes**: Adding indexes to `post_date` may fail on some MySQL configurations due to legacy `0000-00-00` dates.

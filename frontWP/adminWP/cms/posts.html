@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Posts - FrontWP Admin</title>
+    <link href="/assets/styles/application.tailwind.css" rel="stylesheet">
+    <script>
+        // Simple Auth Check
+        function checkAuth() {
+            const token = localStorage.getItem('jwt_token');
+            if (!token) {
+                window.location.href = '/adminWP/login.html';
+            }
+            return token;
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans">
+    
+    <!-- Top Navigation -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <a href="/adminWP/index.html" class="font-bold text-xl text-blue-600">FrontWP Admin</a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="/adminWP/index.html#cms" class="border-blue-500 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            CMS
+                        </a>
+                        <a href="/adminWP/index.html#system" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                            System
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <button onclick="logout()" class="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="px-4 py-6 sm:px-0">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-semibold text-gray-900">Posts</h1>
+                <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm font-medium">Add New</a>
+            </div>
+
+            <div class="bg-white shadow overflow-hidden sm:rounded-md">
+                <div id="loading" class="p-4 text-center text-gray-500">Loading posts...</div>
+                <div id="error-message" class="hidden p-4 text-center text-red-500"></div>
+                <ul id="posts-list" class="divide-y divide-gray-200">
+                    <!-- Posts will be inserted here -->
+                </ul>
+            </div>
+            
+            <!-- Pagination Controls -->
+             <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 mt-4 rounded shadow">
+                <div class="flex-1 flex justify-between sm:hidden">
+                    <button onclick="prevPage()" id="mobile-prev" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Previous </button>
+                    <button onclick="nextPage()" id="mobile-next" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"> Next </button>
+                </div>
+                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                    <div>
+                        <p class="text-sm text-gray-700">
+                            Showing page <span class="font-medium" id="current-page">1</span>
+                        </p>
+                    </div>
+                    <div>
+                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                            <button onclick="prevPage()" id="desktop-prev" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">Previous</span>
+                                <!-- Heroicon name: solid/chevron-left -->
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                            <button onclick="nextPage()" id="desktop-next" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                <span class="sr-only">Next</span>
+                                <!-- Heroicon name: solid/chevron-right -->
+                                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8888/api/v2';
+        let currentPage = 1;
+        const perPage = 10;
+
+        async function fetchPosts(page) {
+            const token = checkAuth();
+            const listEl = document.getElementById('posts-list');
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error-message');
+
+            listEl.innerHTML = '';
+            loadingEl.classList.remove('hidden');
+            errorEl.classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_URL}/posts?page=${page}&per_page=${perPage}`, {
+                    headers: {
+                        'Authorization': token
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        logout();
+                        return;
+                    }
+                    throw new Error(`Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                loadingEl.classList.add('hidden');
+
+                if (data.data.length === 0) {
+                     listEl.innerHTML = '<li class="px-4 py-4 text-center text-gray-500">No posts found.</li>';
+                     return;
+                }
+
+                data.data.forEach(item => {
+                    const post = item.attributes;
+                    const li = document.createElement('li');
+                    li.className = 'block hover:bg-gray-50';
+                    li.innerHTML = `
+                        <div class="px-4 py-4 sm:px-6">
+                            <div class="flex items-center justify-between">
+                                <p class="text-sm font-medium text-blue-600 truncate">${post.title}</p>
+                                <div class="ml-2 flex-shrink-0 flex">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        ${post.status}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mt-2 sm:flex sm:justify-between">
+                                <div class="sm:flex">
+                                    <p class="flex items-center text-sm text-gray-500">
+                                        Author ID: ${item.relationships?.author?.data?.id || 'Unknown'}
+                                    </p>
+                                </div>
+                                <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                                    <p>
+                                        Published on <time datetime="${post.date}">${new Date(post.date).toLocaleDateString()}</time>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    listEl.appendChild(li);
+                });
+                
+                document.getElementById('current-page').textContent = page;
+                
+                // Disable/Enable buttons based on result count (simple heuristic)
+                const hasNext = data.data.length === perPage;
+                document.getElementById('desktop-next').disabled = !hasNext;
+                document.getElementById('mobile-next').disabled = !hasNext;
+                
+                document.getElementById('desktop-prev').disabled = page <= 1;
+                document.getElementById('mobile-prev').disabled = page <= 1;
+
+
+            } catch (error) {
+                console.error('Fetch error:', error);
+                loadingEl.classList.add('hidden');
+                errorEl.textContent = 'Failed to load posts.';
+                errorEl.classList.remove('hidden');
+            }
+        }
+
+        function nextPage() {
+            currentPage++;
+            fetchPosts(currentPage);
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                fetchPosts(currentPage);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('jwt_token');
+            window.location.href = '/adminWP/login.html';
+        }
+
+        // Initialize
+        fetchPosts(currentPage);
+    </script>
+</body>
+</html>

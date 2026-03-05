@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AdminWP Console</title>
+  <link href="/assets/styles/application.tailwind.css" rel="stylesheet">
+  <style>
+    /* Custom scrollbar for sidebar */
+    .scrollbar-thin::-webkit-scrollbar { width: 4px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: #475569; border-radius: 2px; }
+  </style>
+</head>
+<body class="h-full font-sans antialiased text-slate-900">
+  <a href="#panel-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-2 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md">Skip to content</a>
+
+  <!-- Mobile Header -->
+  <header class="sticky top-0 z-40 flex items-center justify-between bg-white px-4 py-3 shadow-sm md:hidden">
+    <div class="flex items-center gap-3">
+      <button id="mobile-menu-toggle" type="button" class="rounded p-2 text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Open sidebar">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+      <span class="font-bold text-lg text-slate-800">AdminWP</span>
+    </div>
+  </header>
+
+  <!-- Mobile Backdrop -->
+  <div id="sidebar-backdrop" class="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm hidden md:hidden" aria-hidden="true"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 flex w-64 flex-col bg-slate-900 text-white transition-transform duration-300 ease-in-out -translate-x-full md:translate-x-0 shadow-xl">
+    <!-- Brand -->
+    <div class="flex h-16 shrink-0 items-center px-6 bg-slate-950 shadow-sm">
+      <div class="flex items-center gap-2">
+        <div class="h-8 w-8 rounded bg-blue-600 flex items-center justify-center">
+          <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        </div>
+        <span class="text-lg font-bold tracking-wide">AdminWP</span>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="flex-1 overflow-y-auto px-3 py-4 scrollbar-thin">
+      <ul id="module-tablist" role="tablist" class="space-y-1">
+        <li>
+          <button id="tab-login" type="button" role="tab" aria-selected="false" aria-controls="panel-login" data-tab="login" class="group flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors aria-selected:bg-blue-600 aria-selected:text-white">
+            <svg class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-white group-aria-selected:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+            Login
+          </button>
+        </li>
+        <li>
+          <button id="tab-setup" type="button" role="tab" aria-selected="false" aria-controls="panel-setup" data-tab="setup" class="group flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors aria-selected:bg-blue-600 aria-selected:text-white">
+            <svg class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-white group-aria-selected:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            Setup
+          </button>
+        </li>
+        <li>
+          <button id="tab-cms" type="button" role="tab" aria-selected="false" aria-controls="panel-cms" data-tab="cms" class="group flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors aria-selected:bg-blue-600 aria-selected:text-white">
+            <svg class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-white group-aria-selected:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+            CMS
+          </button>
+        </li>
+        <li>
+          <button id="tab-system" type="button" role="tab" aria-selected="false" aria-controls="panel-system" data-tab="system" class="group flex w-full items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-slate-300 hover:bg-slate-800 hover:text-white transition-colors aria-selected:bg-blue-600 aria-selected:text-white">
+            <svg class="h-5 w-5 shrink-0 text-slate-400 group-hover:text-white group-aria-selected:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            System
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- User Profile -->
+    <div class="border-t border-slate-800 p-4">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-full bg-slate-700 flex items-center justify-center text-sm font-bold text-slate-300">
+          U
+        </div>
+        <div class="flex flex-col">
+          <span class="text-sm font-medium text-white">Administrator</span>
+          <span class="text-xs text-slate-400">admin@example.com</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex min-h-screen flex-col transition-all duration-300 md:ml-64">
+    <!-- Topbar -->
+    <div class="sticky top-0 z-30 flex h-16 shrink-0 items-center justify-between border-b border-slate-200 bg-white/90 px-4 shadow-sm backdrop-blur-sm sm:px-6 lg:px-8">
+      <nav class="flex" aria-label="Breadcrumb">
+        <ol class="flex items-center space-x-2">
+          <li>
+            <span class="text-slate-400 hover:text-slate-500">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+            </span>
+          </li>
+          <li class="text-slate-300">/</li>
+          <li class="font-medium text-slate-500">Admin</li>
+          <li class="text-slate-300">/</li>
+          <li id="breadcrumb-current" class="font-semibold text-slate-900" aria-current="page">Dashboard</li>
+        </ol>
+      </nav>
+      <div id="context-toolbar" class="flex items-center gap-2"></div>
+    </div>
+
+    <!-- Panel Content -->
+    <div id="panel-content" class="flex-1 p-4 sm:p-6 lg:p-8" aria-live="polite">
+      <div id="panel-login" role="tabpanel" aria-labelledby="tab-login" class="hidden animate-in fade-in duration-300"></div>
+      <div id="panel-setup" role="tabpanel" aria-labelledby="tab-setup" class="hidden animate-in fade-in duration-300"></div>
+      <div id="panel-cms" role="tabpanel" aria-labelledby="tab-cms" class="hidden animate-in fade-in duration-300"></div>
+      <div id="panel-system" role="tabpanel" aria-labelledby="tab-system" class="hidden animate-in fade-in duration-300"></div>
+    </div>
+  </main>
+
+  <script type="module" src="/adminWP/shared/js/admin-shell.js"></script>
+</body>
+</html>

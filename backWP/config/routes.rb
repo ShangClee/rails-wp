@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v2 do
       resources :posts
+      resources :setup, only: [:index, :create]
       resources :users, only: [:index, :show, :update] do
         collection do
           get 'me'
