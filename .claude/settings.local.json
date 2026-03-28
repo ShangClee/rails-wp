@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:codex.wordpress.org)",
+      "WebFetch(domain:developer.wordpress.org)",
+      "Bash(find /Users/shang/Prj2026/rails-wp/backWP -name *.erb)",
+      "Bash(find /Users/shang/Prj2026/rails-wp/backWP -name posts_controller.rb -not -path */api/*)",
+      "Bash(find /Users/shang/Prj2026/rails-wp/backWP/app/controllers -type f -name *.rb)"
+    ]
+  }
+}
