@@ -53,5 +53,11 @@ module Types
     def categories
       WpTermTaxonomy.categories
     end
+
+    field :tags, [Types::WpTermTaxonomyType], null: false
+
+    def tags
+      WpTermTaxonomy.tags
+    end
   end
 end

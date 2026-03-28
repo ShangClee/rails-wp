@@ -31,5 +31,17 @@ module WpAuthenticatable
     def editor?
       role == :editor
     end
+
+    def author?
+      role == :author
+    end
+
+    def contributor?
+      role == :contributor
+    end
+
+    def subscriber?
+      role == :subscriber
+    end
   end
 end

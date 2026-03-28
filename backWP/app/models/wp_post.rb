@@ -21,6 +21,7 @@ class WpPost < ApplicationRecord
   scope :published, -> { where(post_status: 'publish') }
   scope :pages, -> { where(post_type: 'page') }
   scope :posts, -> { where(post_type: 'post') }
+  scope :nav_menu_items, -> { where(post_type: 'nav_menu_item') }
   scope :by_type, ->(type) { where(post_type: type) }
   scope :recent, -> { order(post_date: :desc) }
 

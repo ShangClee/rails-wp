@@ -1,0 +1,97 @@
+<article>
+  <h1 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"><%= @post.post_title %></h1>
+  <div class="mb-5 text-sm text-slate-500">
+    Published on <%= @post.post_date.strftime("%B %d, %Y") %>
+  </div>
+
+  <div class="leading-7 text-slate-800 [&_a]:text-blue-700 [&_a]:underline [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-5">
+    <%= sanitize(@post.post_content) %>
+  </div>
+</article>
+
+<!-- Comments Section -->
+<div class="mt-12 border-t border-slate-200 pt-8">
+  <h2 class="text-xl font-bold text-slate-900 mb-6">Comments</h2>
+
+  <% if @comments.any? %>
+    <div class="mb-8 space-y-6">
+      <% @comments.each do |comment| %>
+        <div class="border border-slate-200 rounded p-4 bg-slate-50">
+          <div class="flex items-center justify-between mb-2">
+            <strong class="text-slate-900"><%= comment.comment_author %></strong>
+            <span class="text-xs text-slate-500"><%= comment.comment_date.strftime("%B %d, %Y at %l:%M %p") %></span>
+          </div>
+          <div class="text-slate-700 text-sm">
+            <%= sanitize(comment.comment_content) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-slate-500 mb-8">No comments yet. Be the first to comment!</p>
+  <% end %>
+
+  <!-- Comment Form -->
+  <% if @post.comment_status == 'open' %>
+    <div class="bg-slate-50 rounded p-6 border border-slate-200">
+      <h3 class="text-lg font-semibold text-slate-900 mb-4">Leave a Comment</h3>
+      <form id="commentForm" class="space-y-4">
+        <div>
+          <label for="comment_author" class="block text-sm font-medium text-slate-700 mb-1">Name *</label>
+          <input type="text" id="comment_author" name="comment_author" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+          <label for="comment_author_email" class="block text-sm font-medium text-slate-700 mb-1">Email *</label>
+          <input type="email" id="comment_author_email" name="comment_author_email" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+          <label for="comment_content" class="block text-sm font-medium text-slate-700 mb-1">Comment *</label>
+          <textarea id="comment_content" name="comment_content" rows="4" required class="w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+        </div>
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">Post Comment</button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById('commentForm');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const commentData = {
+          comment: {
+            comment_post_ID: <%= @post.ID %>,
+            comment_author: document.getElementById('comment_author').value,
+            comment_author_email: document.getElementById('comment_author_email').value,
+            comment_content: document.getElementById('comment_content').value
+          }
+        };
+
+        try {
+          const response = await fetch('/api/v2/comments', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+            },
+            body: JSON.stringify(commentData)
+          });
+
+          if (response.ok) {
+            alert('Comment submitted! It will appear after approval.');
+            form.reset();
+            // Optionally reload the page
+            // location.reload();
+          } else {
+            alert('Error submitting comment. Please try again.');
+          }
+        } catch (e) {
+          alert('Error submitting comment: ' + e.message);
+        }
+      });
+    </script>
+  <% end %>
+</div>
+
+<div class="mt-10">
+  <%= link_to "← Back to Home", root_path, class: "text-blue-700 no-underline hover:text-blue-500" %>
+</div>
