@@ -6,7 +6,19 @@
       "WebFetch(domain:developer.wordpress.org)",
       "Bash(find /Users/shang/Prj2026/rails-wp/backWP -name *.erb)",
       "Bash(find /Users/shang/Prj2026/rails-wp/backWP -name posts_controller.rb -not -path */api/*)",
-      "Bash(find /Users/shang/Prj2026/rails-wp/backWP/app/controllers -type f -name *.rb)"
+      "Bash(find /Users/shang/Prj2026/rails-wp/backWP/app/controllers -type f -name *.rb)",
+      "Bash(docker compose:*)",
+      "Bash(curl -I http://localhost:8888/)",
+      "Bash(curl -s http://localhost:8888/)",
+      "Bash(curl -s http://localhost:8080/admin/setup.html)",
+      "Bash(curl -s http://localhost:8080/adminWP/)",
+      "Bash(curl -s http://localhost:8080/adminWP/index.htm)",
+      "Bash(curl -s http://localhost:8080/adminWP/shared/js/modules/system-setup.js)",
+      "Bash(curl:*)",
+      "Bash(openspec list:*)",
+      "Bash(openspec new:*)",
+      "Bash(openspec status:*)",
+      "Bash(openspec instructions:*)"
     ]
   }
 }

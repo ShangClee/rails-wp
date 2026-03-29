@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   # Alias Devise helpers to match generic user terminology
   def current_user
     current_wp_user

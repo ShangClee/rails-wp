@@ -1,4 +1,8 @@
-import { parseJsonapi } from '../api-helpers.js';
+const USERS_QUERY = `
+  query GetUsers {
+    users { ID role }
+  }
+`;
 
 const ROLE_DESCRIPTIONS = {
   administrator: 'Full access to all features',
@@ -16,39 +20,24 @@ export default async function systemRoles(content, shell) {
     ${shell.renderSkeleton()}
   `;
 
-  try {
-    const response = await shell.apiRequest('/users');
-    const users = parseJsonapi(response);
-    renderRoles(content, users, shell);
-  } catch (e) {
-    renderRoles(content, [], shell);
+  let users = shell.store.get('users');
+  if (!users) {
+    try {
+      const data = await shell.gqlRequest(USERS_QUERY);
+      users = data.users;
+      shell.store.set('users', users);
+    } catch (e) {
+      users = [];
+    }
   }
-}
 
-function renderRoles(content, users, shell) {
-  // Compute role counts
-  const roleCounts = {
-    administrator: 0,
-    editor: 0,
-    author: 0,
-    contributor: 0,
-    subscriber: 0
-  };
-
+  const roleCounts = { administrator: 0, editor: 0, author: 0, contributor: 0, subscriber: 0 };
   users.forEach(user => {
-    const role = user.roles || 'subscriber';
-    if (roleCounts.hasOwnProperty(role)) {
+    const role = user.role || 'subscriber';
+    if (Object.prototype.hasOwnProperty.call(roleCounts, role)) {
       roleCounts[role]++;
     }
   });
-
-  const rolesList = Object.entries(roleCounts).map(([role, count]) => `
-    <tr>
-      <td><strong>${role.charAt(0).toUpperCase() + role.slice(1)}</strong></td>
-      <td>${count}</td>
-      <td>${ROLE_DESCRIPTIONS[role] || ''}</td>
-    </tr>
-  `).join('');
 
   content.innerHTML = `
     <div class="toolbar">
@@ -64,7 +53,13 @@ function renderRoles(content, users, shell) {
           </tr>
         </thead>
         <tbody>
-          ${rolesList}
+          ${Object.entries(roleCounts).map(([role, count]) => `
+            <tr>
+              <td><strong>${role.charAt(0).toUpperCase() + role.slice(1)}</strong></td>
+              <td>${count}</td>
+              <td>${ROLE_DESCRIPTIONS[role] || ''}</td>
+            </tr>
+          `).join('')}
         </tbody>
       </table>
     </div>

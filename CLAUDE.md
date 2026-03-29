@@ -42,11 +42,16 @@ docker compose up --build
 - phpMyAdmin: http://localhost:8181 (user: `root`, password: `password`)
 
 ### First-Time Setup
-1. Visit http://localhost:8080/admin/setup.html
-2. Create an admin user and configure site settings
-3. Navigate to admin panel at http://localhost:8080/admin/
-4. Create posts/pages via the admin UI or API
-5. View public site at http://localhost:8888
+1. Wait for all containers to start: `docker compose up --build`
+2. Visit **http://localhost:8080/admin/setup.html** (nginx serves this static page)
+3. Fill the setup form:
+   - Site Title, Admin Email, Admin Username, Password
+   - Site URL: `http://localhost:8888` (the Rails backend)
+4. Click "Complete Setup"
+5. You'll be redirected to admin panel: **http://localhost:8080/adminWP/**
+6. Create posts/pages via UI or API, view public site at **http://localhost:8888**
+
+**Note**: The setup wizard calls `POST /api/v2/setup` on the Rails backend to initialize WordPress.
 
 ## Backend (backWP) Commands
 

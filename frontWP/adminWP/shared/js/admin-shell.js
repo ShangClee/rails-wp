@@ -1,11 +1,27 @@
 const API_BASE = 'http://localhost:8888/api/v2';
+const GQL_URL = 'http://localhost:8888/graphql';
 
 class AdminShell {
   constructor() {
     this.currentTab = 'cms';
     this.currentPage = 'cms/posts';
     this.modules = {};
+    this.store = this._createStore();
     this.init();
+  }
+
+  _createStore() {
+    const cache = new Map();
+    return {
+      set(key, data) { cache.set(key, data); },
+      get(key) { return cache.get(key) ?? null; },
+      find(key, id) {
+        const data = cache.get(key);
+        if (!Array.isArray(data)) return null;
+        return data.find(item => item.ID == id || item.id == id) ?? null;
+      },
+      invalidate(key) { cache.delete(key); }
+    };
   }
 
   init() {
@@ -70,7 +86,7 @@ class AdminShell {
   async loadModules() {
     const modules = [
       'cms-posts', 'cms-pages', 'cms-media', 'cms-menus',
-      'system-users', 'system-roles', 'system-tokens', 'system-health', 'system-settings',
+      'system-users', 'system-roles', 'system-tokens', 'system-health', 'system-settings', 'system-setup',
       'adminWP-tests'
     ];
 
@@ -121,6 +137,32 @@ class AdminShell {
       return await response.json();
     } catch (error) {
       this.showToast(error.message, 'error');
+      throw error;
+    }
+  }
+
+  async gqlRequest(query, variables = {}) {
+    const token = localStorage.getItem('jwt_token');
+    try {
+      const response = await fetch(GQL_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { 'Authorization': `Bearer ${token}` })
+        },
+        body: JSON.stringify({ query, variables })
+      });
+      const json = await response.json();
+      if (json.errors?.length) {
+        const msg = json.errors[0].message;
+        this.showToast(msg, 'error');
+        throw new Error(msg);
+      }
+      return json.data;
+    } catch (error) {
+      if (!error.message.includes('API Error')) {
+        this.showToast(error.message, 'error');
+      }
       throw error;
     }
   }

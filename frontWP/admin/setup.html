@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPress Setup Wizard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        .setup-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            width: 90%;
+            padding: 2.5rem;
+        }
+        .setup-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .setup-header h1 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        .setup-header p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .help-text {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .status-message {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        .status-message.success {
+            background: #ecfdf5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+            display: block;
+        }
+        .status-message.error {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+            display: block;
+        }
+        .status-message.loading {
+            background: #eff6ff;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+            display: block;
+        }
+        .loader {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner 0.6s linear infinite;
+            margin-right: 0.5rem;
+        }
+        @keyframes spinner {
+            to { transform: rotate(360deg); }
+        }
+        .divider {
+            text-align: center;
+            color: #d1d5db;
+            margin: 2rem 0 1.5rem;
+            font-size: 0.85rem;
+        }
+        .info-box {
+            background: #f3f4f6;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+        .info-box strong {
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-card">
+        <div class="setup-header">
+            <h1>🚀 WordPress Setup</h1>
+            <p>Complete the initial setup to get started</p>
+        </div>
+
+        <div class="info-box">
+            <strong>Welcome!</strong> This setup wizard will create your admin account and configure basic site settings. You can change these anytime in Settings.
+        </div>
+
+        <div id="statusMessage" class="status-message"></div>
+
+        <form id="setupForm">
+            <div class="form-group">
+                <label for="blogname">Site Title *</label>
+                <input type="text" id="blogname" name="blogname" placeholder="My Awesome Blog" required>
+                <div class="help-text">The name of your website</div>
+            </div>
+
+            <div class="form-group">
+                <label for="admin_email">Admin Email *</label>
+                <input type="email" id="admin_email" name="admin_email" placeholder="admin@example.com" required>
+                <div class="help-text">Email for the admin account</div>
+            </div>
+
+            <div class="form-group">
+                <label for="user_login">Admin Username *</label>
+                <input type="text" id="user_login" name="user_login" placeholder="admin" required>
+                <div class="help-text">Username for logging in (minimum 3 characters)</div>
+            </div>
+
+            <div class="form-group">
+                <label for="user_pass">Admin Password *</label>
+                <input type="password" id="user_pass" name="user_pass" placeholder="••••••••" required>
+                <div class="help-text">Make it strong! At least 8 characters recommended</div>
+            </div>
+
+            <div class="form-group">
+                <label for="siteurl">Site URL *</label>
+                <input type="url" id="siteurl" name="siteurl" placeholder="http://localhost:8888" required>
+                <div class="help-text">Your website's main URL</div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Complete Setup
+            </button>
+        </form>
+
+        <div class="divider">OR</div>
+
+        <p style="text-align: center; color: #6b7280; font-size: 0.875rem;">
+            Already set up?
+            <a href="/adminWP/index.html" style="color: #667eea; text-decoration: none; font-weight: 600;">
+                Go to Admin Panel →
+            </a>
+        </p>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8888/api/v2';
+        const form = document.getElementById('setupForm');
+        const statusMessage = document.getElementById('statusMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Pre-fill siteurl with current origin
+        document.getElementById('siteurl').value = window.location.origin === 'http://localhost:8080'
+            ? 'http://localhost:8888'
+            : window.location.origin;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validate
+            const username = document.getElementById('user_login').value;
+            if (username.length < 3) {
+                showStatus('Username must be at least 3 characters', 'error');
+                return;
+            }
+
+            const password = document.getElementById('user_pass').value;
+            if (password.length < 8) {
+                showStatus('Password must be at least 8 characters', 'error');
+                return;
+            }
+
+            submitBtn.disabled = true;
+            showStatus('<span class="loader"></span> Setting up WordPress...', 'loading');
+
+            try {
+                const response = await fetch(`${API_BASE}/setup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        wp_user: {
+                            user_login: document.getElementById('user_login').value,
+                            user_email: document.getElementById('admin_email').value,
+                            password: document.getElementById('user_pass').value,
+                            display_name: 'Administrator'
+                        },
+                        options: {
+                            blogname: document.getElementById('blogname').value,
+                            admin_email: document.getElementById('admin_email').value,
+                            siteurl: document.getElementById('siteurl').value,
+                            home: document.getElementById('siteurl').value
+                        }
+                    })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Setup failed');
+                }
+
+                showStatus('✓ WordPress setup complete! Redirecting to admin panel...', 'success');
+                setTimeout(() => {
+                    window.location.href = '/adminWP/index.html';
+                }, 1500);
+
+            } catch (error) {
+                console.error('Setup error:', error);
+                showStatus('❌ ' + error.message, 'error');
+                submitBtn.disabled = false;
+            }
+        });
+
+        function showStatus(message, type) {
+            statusMessage.className = `status-message ${type}`;
+            statusMessage.innerHTML = message;
+            window.scrollTo(0, 0);
+        }
+
+        // Check if already set up
+        async function checkSetupStatus() {
+            try {
+                const response = await fetch(`${API_BASE}/setup`);
+                const data = await response.json();
+                if (data.installed) {
+                    showStatus('✓ WordPress is already installed. Redirecting to admin panel...', 'success');
+                    setTimeout(() => {
+                        window.location.href = '/adminWP/index.html';
+                    }, 1500);
+                    form.style.display = 'none';
+                    submitBtn.disabled = true;
+                }
+            } catch (error) {
+                console.log('Setup check:', error);
+            }
+        }
+
+        // Check on load
+        checkSetupStatus();
+    </script>
+</body>
+</html>

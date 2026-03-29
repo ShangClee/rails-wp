@@ -25,14 +25,16 @@ docker compose up --build
 Wait for "PostgreSQL is ready to accept connections" (or similar for MariaDB).
 
 ### 2. Initialize WordPress
-Visit: **http://localhost:8080/admin/setup.html**
+Visit: **http://localhost:8080/adminWP/#system/setup**
 
-- Admin username: `admin`
-- Admin password: Choose something secure
-- Site title: Your site name
-- Admin email: Your email
+Fill in the setup form:
+- **Site Title**: Your website name (e.g., "My Blog")
+- **Admin Email**: Your email address
+- **Admin Username**: Login username (e.g., "admin")
+- **Admin Password**: Strong password (8+ characters)
+- **Site URL**: Should be `http://localhost:8888` (backend server)
 
-Click "Install WordPress" and wait for success message.
+Click "Complete Setup" and wait for the redirect to the admin panel.
 
 ### 3. Access Your CMS
 
@@ -188,13 +190,13 @@ curl -X GET http://localhost:8888/api/v2/users/me \
 
 | Feature | URL |
 |---------|-----|
-| Setup wizard | http://localhost:8080/admin/setup.html |
-| Admin panel | http://localhost:8080/admin/ |
-| Posts | http://localhost:8080/admin/#cms/posts |
-| Pages | http://localhost:8080/admin/#cms/pages |
-| Media | http://localhost:8080/admin/#cms/media |
-| Users | http://localhost:8080/admin/#system/users |
-| Settings | http://localhost:8080/admin/#system/settings |
+| Setup wizard | http://localhost:8080/adminWP/#system/setup |
+| Admin panel | http://localhost:8080/adminWP/ |
+| Posts | http://localhost:8080/adminWP/#cms/posts |
+| Pages | http://localhost:8080/adminWP/#cms/pages |
+| Media | http://localhost:8080/adminWP/#cms/media |
+| Users | http://localhost:8080/adminWP/#system/users |
+| Settings | http://localhost:8080/adminWP/#system/settings |
 
 ---
 
