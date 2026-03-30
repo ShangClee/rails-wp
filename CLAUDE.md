@@ -97,6 +97,23 @@ docker compose exec backwp bundle exec bundler-audit check
 docker compose exec backwp bundle exec rake rswag:specs:swaggerize
 ```
 
+### Frontend Type Generation
+```bash
+# Regenerate JSDoc typedefs from GraphQL schema (run after schema changes)
+# From project root (host machine, not Docker):
+JSDOC_OUTPUT=frontWP/jsdoc/types.js docker compose exec -e JSDOC_OUTPUT=/rails/../../frontWP/jsdoc/types.js backwp bundle exec rake jsdoc:generate
+
+# Or simpler: write to stdout and redirect
+docker compose exec backwp bundle exec rake jsdoc:generate JSDOC_OUTPUT=/rails/tmp/types.js \
+  && docker compose cp backwp:/rails/tmp/types.js frontWP/jsdoc/types.js
+```
+
+The generated file is at `frontWP/jsdoc/types.js`. Modules opt in by adding:
+```javascript
+// @ts-check
+/// <reference path="../../../../jsdoc/types.js" />
+```
+
 ### Data Management
 ```bash
 # Export posts to JSON

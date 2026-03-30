@@ -1,3 +1,5 @@
+// @ts-check
+/// <reference path="../../../../jsdoc/types.js" />
 import { renderModal, confirmDelete } from '../api-helpers.js';
 
 const PAGES_QUERY = `

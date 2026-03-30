@@ -1,3 +1,6 @@
+// @ts-check
+/// <reference path="../../../../jsdoc/types.js" />
+
 const USERS_QUERY = `
   query GetUsers {
     users {
