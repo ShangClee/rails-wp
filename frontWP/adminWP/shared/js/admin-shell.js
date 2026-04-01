@@ -85,7 +85,7 @@ class AdminShell {
 
   async loadModules() {
     const modules = [
-      'cms-posts', 'cms-pages', 'cms-media', 'cms-menus',
+      'cms-posts', 'cms-pages', 'cms-media', 'cms-comments', 'cms-menus',
       'system-users', 'system-roles', 'system-tokens', 'system-health', 'system-settings', 'system-setup',
       'adminWP-tests'
     ];
@@ -131,10 +131,16 @@ class AdminShell {
       });
 
       if (!response.ok) {
-        throw new Error(`API Error: ${response.status}`);
+        const body = await response.json().catch(() => ({}));
+        throw new Error(body.message || `API Error: ${response.status}`);
       }
 
-      return await response.json();
+      if (response.status === 204) return null;
+
+      const json = await response.json();
+      // Attach WP pagination headers to the response object so modules can read them
+      json.headers = response.headers;
+      return json;
     } catch (error) {
       this.showToast(error.message, 'error');
       throw error;

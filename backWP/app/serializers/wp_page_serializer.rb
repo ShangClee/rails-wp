@@ -1,9 +1,9 @@
-class WpPostSerializer
+class WpPageSerializer
   include JSONAPI::Serializer
   include WordpressSerializer
 
   set_id :ID
-  set_type :post
+  set_type :page
 
   attributes :post_title, :post_content, :post_excerpt, :post_status, :post_date, :post_name, :post_type
 

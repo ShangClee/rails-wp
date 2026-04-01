@@ -15,4 +15,5 @@ class WpTermTaxonomy < ApplicationRecord
   scope :categories, -> { where(taxonomy: 'category') }
   scope :tags, -> { where(taxonomy: 'post_tag') }
   scope :nav_menus, -> { where(taxonomy: 'nav_menu') }
+  scope :post_formats, -> { where(taxonomy: 'post_format') }
 end

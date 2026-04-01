@@ -1,8 +1,8 @@
 module Api
   module V2
     class SettingsController < ApplicationController
-      before_action :authenticate_user!, only: [:update]
-      before_action :require_admin, only: [:update]
+      before_action :authenticate_user!
+      before_action :require_admin
 
       # GET /api/v2/settings
       def show

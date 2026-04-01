@@ -11,6 +11,22 @@ module SettingsUtility
     time_format
     posts_per_page
     default_comment_status
+    comment_moderation
+    comment_registration
+    close_comments_for_old_posts
+    close_comments_days_old
+    thread_comments
+    thread_comments_depth
+    comments_per_page
+    default_ping_status
+    use_smilies
+    page_on_front
+    page_for_posts
+    show_on_front
+    blog_public
+    permalink_structure
+    upload_path
+    uploads_use_yearmonth_folders
   ].freeze
 
   # Fetch all allowed settings from WpOption

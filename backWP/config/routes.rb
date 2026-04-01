@@ -14,13 +14,28 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v2 do
-      resources :posts
+      resources :posts do
+        resources :revisions, only: [:index], controller: 'revisions'
+        resources :meta, only: [:index, :create, :update, :destroy], controller: 'post_meta'
+      end
+      post 'revisions/:id/restore', to: 'revisions#restore'
       resources :pages
       resources :media
-      resources :taxonomies
+      resources :taxonomies do
+        collection do
+          get :post_formats
+        end
+      end
       resources :categories
       resources :tags
-      resources :comments
+      resources :comments do
+        member do
+          patch :approve
+          patch :unapprove
+          patch :spam
+          patch :trash
+        end
+      end
       resources :menus do
         resources :items, controller: 'menu_items', only: [:create, :update, :destroy]
       end
@@ -35,6 +50,7 @@ Rails.application.routes.draw do
         end
       end
       get 'health', to: 'health#show'
+      get 'types', to: 'post_types#index'
     end
   end
 

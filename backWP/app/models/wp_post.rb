@@ -17,6 +17,10 @@ class WpPost < ApplicationRecord
   validates :post_status, presence: true, length: { maximum: 20 }
   validates :post_name, length: { maximum: 200 }
   
+  # Revisions
+  has_many :revisions, ->(post) { where(post_type: 'revision', post_parent: post.ID) },
+           class_name: 'WpPost', foreign_key: 'post_parent'
+
   # Scopes
   scope :published, -> { where(post_status: 'publish') }
   scope :pages, -> { where(post_type: 'page') }
@@ -24,6 +28,7 @@ class WpPost < ApplicationRecord
   scope :nav_menu_items, -> { where(post_type: 'nav_menu_item') }
   scope :by_type, ->(type) { where(post_type: type) }
   scope :recent, -> { order(post_date: :desc) }
+  scope :revisions, -> { where(post_type: 'revision') }
 
   # Callbacks
   before_validation :set_defaults, on: :create
